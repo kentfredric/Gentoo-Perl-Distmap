@@ -91,17 +91,29 @@ version 0.1.0
 
 =head2 all_mapped_dists
 
+	my @names = $instance->all_mapped_dists();
+
 =head2 mapped_dists
+
+	my @names = $instance->mapped_dists();
 
 =head2 multi_repo_dists
 
+	my @names = $instance->multi_repo_dists();
+
 =head2 dists_in_repo
 
+	my @names = $instance->dists_in_repo('gentoo');
+
 =head2 to_rec
+
+	my $datastructure = $instance->to_rec
 
 =head1 CLASS METHODS
 
 =head2 from_rec
+
+	my $instance = G:P:D:Map->from_rec( $datastructure );
 
 =head1 ATTRIBUTE METHODS
 

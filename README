@@ -30,10 +30,22 @@ ATTRIBUTES
   map
 METHODS
   save
+            $instance->save( file => $filepath );
+            $instance->save( filehandle => $fh );
+            my $string = $instance->save( string => );
+
 CLASS METHODS
   load
+            my $instance = G:P:Distmap->load( file => $filepath );
+            my $instance = G:P:Distmap->load( filehandle => $fh );
+            my $instance = G:P:Distmap->load( string => $str );
+
   decoder
+            $decoder = G:P:Distmap->decoder();
+
   encoder
+            $encoder = G:P:Distmap->encoder();
+
 ATTRIBUTE METHODS
   map -> map
   multi_repo_dists -> map

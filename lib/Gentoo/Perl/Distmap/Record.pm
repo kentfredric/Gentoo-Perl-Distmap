@@ -108,15 +108,27 @@ version 0.1.0
 
 =head2 add_version
 
+	$instance->add_version('1.1');
+
 =head2 has_versions
+
+	if( $instance->has_versions ){
+
+	}
 
 =head2 enumerate_packages
 
+	my @packages = $instance->enumerate_packages();
+
 =head2 to_rec
+
+	my $datastructure = $instance->to_rec
 
 =head1 CLASS METHODS
 
 =head2 from_rec
+
+	my $instance = G:P:D:Record->from_rec( $datastructure );
 
 =head1 ATTRIBUTE METHODS
 

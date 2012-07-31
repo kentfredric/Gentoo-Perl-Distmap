@@ -85,15 +85,31 @@ version 0.1.0
 
 =head2 has_versions
 
+	if( $instance->has_versions() ) {
+	
+	}
+
 =head2 is_multi_repo
+
+	if ( $instance->is_multi_repo() ){
+
+	}
 
 =head2 in_repo
 
+	if ( my @records = $instance->in_repo('gentoo') ) {
+		/* records from gentoo only */
+	}
+
 =head2 to_rec
+
+	my $datastructure = $instance->to_rec
 
 =head1 CLASS METHODS
 
 =head2 from_rec
+
+	my $instance = G:P:D:RecordSet->from_rec( $datastructure );
 
 =head1 ATTRIBUTE METHODS
 

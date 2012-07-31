@@ -45,7 +45,7 @@ sub save {
 
 sub _save_string     { return $_[1] }
 sub _save_filehandle { return $_[2]->print( $_[1] ) }
-sub _save_file       { require Path::Class::File; return $_[0]->_save_filehandle( $_[1], Path::Class::File->new( $_[2] )->openw() ) }
+sub _save_file { require Path::Class::File; return $_[0]->_save_filehandle( $_[1], Path::Class::File->new( $_[2] )->openw() ) }
 
 
 sub _load_file { require Path::Class::File; return scalar Path::Class::File->new( $_[2] )->slurp() }
@@ -109,13 +109,25 @@ Interface for creating/augmenting/comparing .json files still to be defined, bas
 
 =head2 save
 
+	$instance->save( file => $filepath );
+	$instance->save( filehandle => $fh );
+	my $string = $instance->save( string => );
+
 =head1 CLASS METHODS
 
 =head2 load
 
+	my $instance = G:P:Distmap->load( file => $filepath );
+	my $instance = G:P:Distmap->load( filehandle => $fh );
+	my $instance = G:P:Distmap->load( string => $str );
+
 =head2 decoder
 
+	$decoder = G:P:Distmap->decoder();
+
 =head2 encoder
+
+	$encoder = G:P:Distmap->encoder();
 
 =head1 ATTRIBUTE METHODS
 
