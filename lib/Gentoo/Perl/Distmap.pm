@@ -5,7 +5,7 @@ package Gentoo::Perl::Distmap;
 
 # ABSTRACT: A reader/writer for the metadata/perl/distmap.json file.
 
-use 5.10.0;
+use 5.010000;
 use Gentoo::Perl::Distmap::Record;
 use Gentoo::Perl::Distmap::Map;
 
@@ -37,10 +37,32 @@ Interface for creating/augmenting/comparing .json files still to be defined, bas
 
 =cut
 
+=attr map
+
+=attr_method map -> map
+
+=attr_method multi_repo_dists -> map
+
+=attr_method all_mapped_dists -> map
+
+=attr_method mapped_dists -> map
+
+=attr_method dists_in_repo -> map
+
+=cut
+
 has map => ( rw,
   default => quote_sub(q| require Gentoo::Perl::Distmap::Map; Gentoo::Perl::Distmap::Map->new() |),
-  handles => [qw( multi_repo_dists all_mapped_dists mapped_dists dists_in_repo )]
+  handles => [qw( multi_repo_dists all_mapped_dists mapped_dists dists_in_repo )],
 );
+
+=classmethod load
+
+	my $instance = G:P:Distmap->load( file => $filepath );
+	my $instance = G:P:Distmap->load( filehandle => $fh );
+	my $instance = G:P:Distmap->load( string => $str );
+
+=cut
 
 sub load {
   my ( $self, $method, $source ) = @_;
@@ -51,18 +73,51 @@ sub load {
   );
 }
 
+=method save
+
+	$instance->save( file => $filepath );
+	$instance->save( filehandle => $fh );
+	my $string = $instance->save( string => );
+
+=cut
+
 sub save {
   my ( $self, $method, $target ) = @_;
   return $self->can( '_save_' . $method )->( $self, $self->encoder->encode( $self->map->to_rec ), $target );
 }
 
+=p_method _save_string
+
+=p_method _save_filehandle
+
+=p_method _save_file
+
+=cut
+
 sub _save_string     { return $_[1] }
-sub _save_filehandle { $_[2]->print( $_[1] ) }
-sub _save_file       { require Path::Class::File; $_[0]->_save_filehandle( $_[1], Path::Class::File->new( $_[2] )->openw() ) }
+sub _save_filehandle { return $_[2]->print( $_[1] ) }
+sub _save_file { require Path::Class::File; return $_[0]->_save_filehandle( $_[1], Path::Class::File->new( $_[2] )->openw() ) }
+
+=pc_method _load_file
+
+=pc_method _load_filehandle
+
+=pc_method _load_string
+
+=cut
 
 sub _load_file { require Path::Class::File; return scalar Path::Class::File->new( $_[2] )->slurp() }
 sub _load_filehandle { local $/ = undef; return scalar $_[2]->getline }
 sub _load_string { return $_[2] }
+
+=classmethod decoder
+
+	$decoder = G:P:Distmap->decoder();
+
+=classmethod encoder
+
+	$encoder = G:P:Distmap->encoder();
+=cut
 
 sub decoder {
   return state $json = do { require JSON; JSON->new->pretty->utf8->canonical; }
@@ -73,6 +128,7 @@ sub encoder {
 }
 
 no Moo;
+no MooseX::Has::Sugar;
 
 1;
 
