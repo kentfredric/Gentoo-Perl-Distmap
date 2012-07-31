@@ -55,8 +55,9 @@ sub add_version {
   }
   if ( keys %config ) {
     require Carp;
-    Carp::confess( "Suplus keys in config: " . join q[,], keys %config );
+    Carp::confess( 'Surplus keys in config: ' . join q[,], keys %config );
   }
+  ## no critic( ProhibitAmbiguousNames )
   my $record;
   my (@found) = $self->in_repository( $cloned{repository} );
   @found =
@@ -66,7 +67,7 @@ sub add_version {
   }
   elsif ( @found > 1 ) {
     require Carp;
-    Carp::confess( sprintf "Bug: >1 result for ==category(%s) ==package(%s) ==repository(%s) ",
+    Carp::confess( sprintf 'Bug: >1 result for ==category(%s) ==package(%s) ==repository(%s) ',
       $cloned{category}, $cloned{package}, $cloned{repository} );
   }
   else {
@@ -77,7 +78,7 @@ sub add_version {
     );
     push @{ $self->records }, $record;
   }
-  if ( grep { $_ eq $cloned{version} } @{ $record->versions_gentoo } ) {
+  if ( scalar grep { $_ eq $cloned{version} } @{ $record->versions_gentoo } ) {
     require Carp;
     Carp::carp( "Tried to insert version $cloned{version} muliple times for "
         . " package $cloned{package} category $cloned{category} repository $cloned{repository}" );
