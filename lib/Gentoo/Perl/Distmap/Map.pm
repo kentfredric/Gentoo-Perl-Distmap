@@ -26,7 +26,7 @@ has store => rw, default => quote_sub(q{ {} });
 sub all_mapped_dists { return keys %{ $_[0]->store } }
 
 =method mapped_dists
-	
+
 	my @names = $instance->mapped_dists();
 
 =cut
@@ -69,27 +69,28 @@ sub dists_in_repository {
 	);
 
 =cut
+
 sub add_version {
-	my ( $self, %config ) = @_;
-	my %cloned;
-	for my $need ( qw( distribution category package version repository ) ) {
-		if ( exists $config{$need} ){
-			$cloned{$need} = delete $config{$need};
-			next;
-		}
-		require Carp;
-		Carp::confess("Need parameter $need in config");
-	}
-	if ( keys %config ){ 
-		require Carp;
-		Carp::confess("Suplus keys in config: " . join q[,], keys %config );
-	}
-	if ( not exists $self->store->{ $cloned{distribution} } ){
-		$self->store->{ $cloned{distribution} } = Gentoo::Perl::Distmap::RecordSet->new();
-	}
-	my $distro = delete $cloned{distribution};
-	$self->store->{ $distro }->add_version(%cloned);
-	return $self->store->{$distro};
+  my ( $self, %config ) = @_;
+  my %cloned;
+  for my $need (qw( distribution category package version repository )) {
+    if ( exists $config{$need} ) {
+      $cloned{$need} = delete $config{$need};
+      next;
+    }
+    require Carp;
+    Carp::confess("Need parameter $need in config");
+  }
+  if ( keys %config ) {
+    require Carp;
+    Carp::confess( "Suplus keys in config: " . join q[,], keys %config );
+  }
+  if ( not exists $self->store->{ $cloned{distribution} } ) {
+    $self->store->{ $cloned{distribution} } = Gentoo::Perl::Distmap::RecordSet->new();
+  }
+  my $distro = delete $cloned{distribution};
+  $self->store->{$distro}->add_version(%cloned);
+  return $self->store->{$distro};
 }
 
 =method to_rec
@@ -97,7 +98,6 @@ sub add_version {
 	my $datastructure = $instance->to_rec
 
 =cut
-
 
 sub to_rec {
   my ($self) = @_;

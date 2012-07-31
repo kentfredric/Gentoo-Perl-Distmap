@@ -20,7 +20,7 @@ has 'records' => rw, default => quote_sub(q{ [] });
 =method has_versions
 
 	if( $instance->has_versions() ) {
-	
+
 	}
 
 =cut

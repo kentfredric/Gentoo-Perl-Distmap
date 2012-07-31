@@ -77,7 +77,7 @@ sub enumerate_packages {
 
 	my $datastructure = $instance->to_rec
 
-=cut 
+=cut
 
 sub to_rec {
   my ($self) = @_;
