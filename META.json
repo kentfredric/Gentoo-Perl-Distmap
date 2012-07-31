@@ -50,6 +50,7 @@
       },
       "test" : {
          "requires" : {
+            "Data::Dump" : "0",
             "File::Find" : "0",
             "File::Temp" : "0",
             "FindBin" : "0",
@@ -62,19 +63,19 @@
    "provides" : {
       "Gentoo::Perl::Distmap" : {
          "file" : "lib/Gentoo/Perl/Distmap.pm",
-         "version" : "v0.1.0"
+         "version" : "v0.1.1"
       },
       "Gentoo::Perl::Distmap::Map" : {
          "file" : "lib/Gentoo/Perl/Distmap/Map.pm",
-         "version" : "v0.1.0"
+         "version" : "v0.1.1"
       },
       "Gentoo::Perl::Distmap::Record" : {
          "file" : "lib/Gentoo/Perl/Distmap/Record.pm",
-         "version" : "v0.1.0"
+         "version" : "v0.1.1"
       },
       "Gentoo::Perl::Distmap::RecordSet" : {
          "file" : "lib/Gentoo/Perl/Distmap/RecordSet.pm",
-         "version" : "v0.1.0"
+         "version" : "v0.1.1"
       }
    },
    "release_status" : "stable",
@@ -86,10 +87,11 @@
          "web" : "https://github.com/kentfredric/Gentoo-Perl-Distmap"
       }
    },
-   "version" : "0.1.0",
+   "version" : "0.1.1",
    "x_BuiltWith" : {
       "modules" : {
          "Carp" : "1.26",
+         "Data::Dump" : "1.21",
          "Dist::Zilla::PluginBundle::Author::KENTNL" : "1.4.3",
          "Dist::Zilla::PluginBundle::Author::KENTNL::Lite" : "NA(possibly not installed)",
          "File::Find" : "1.20",

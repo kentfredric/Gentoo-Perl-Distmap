@@ -3,20 +3,20 @@ NAME
     metadata/perl/distmap.json file.
 
 VERSION
-    version 0.1.0
+    version 0.1.1
 
 SYNOPSIS
             my $dm  = Gentoo::Perl::Distmap->load(  file => '../path/to/distmap.json' );
             $dm->save( file => '/tmp/foo.x' );
 
-            for my $dist ( sort $dm->dists_in_repo('gentoo') ) {
+            for my $dist ( sort $dm->dists_in_repository('gentoo') ) {
                     /* see the upstream distnames visible in gentoo */
             }
-            for my $dist ( sort $dm->dists_in_repo('perl-experimental') ) {
+            for my $dist ( sort $dm->dists_in_repository('perl-experimental') ) {
                     /* see the upstream distnames visible in perl-experimental */
             }
-            for my $dist ( sort $dm->multi_repo_dists ) {
-                    /* see the dists that exist in more than one repo */
+            for my $dist ( sort $dm->multi_repository_dists ) {
+                    /* see the dists that exist in more than one repository */
             }
     -       for my $dist ( sort $dm->mapped_dists ) {
                     /* see the dists that have at least one version in the dataset */
@@ -48,10 +48,11 @@ CLASS METHODS
 
 ATTRIBUTE METHODS
   map -> map
-  multi_repo_dists -> map
+  multi_repository_dists -> map
   all_mapped_dists -> map
   mapped_dists -> map
-  dists_in_repo -> map
+  dists_in_repository -> map
+  add_version -> map
 PRIVATE METHODS
   _save_string
   _save_filehandle

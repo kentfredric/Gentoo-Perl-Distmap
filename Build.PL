@@ -7,6 +7,7 @@ use Module::Build 0.3601;
 
 my %module_build_args = (
   "build_requires" => {
+    "Data::Dump" => 0,
     "File::Find" => 0,
     "File::Temp" => 0,
     "FindBin" => 0,
@@ -23,7 +24,7 @@ my %module_build_args = (
     "Kent Fredric <kentfredric\@gmail.com>"
   ],
   "dist_name" => "Gentoo-Perl-Distmap",
-  "dist_version" => "0.1.0",
+  "dist_version" => "0.1.1",
   "license" => "perl",
   "module_name" => "Gentoo::Perl::Distmap",
   "recommends" => {},

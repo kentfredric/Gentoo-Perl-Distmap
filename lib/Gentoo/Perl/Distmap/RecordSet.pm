@@ -6,7 +6,7 @@ BEGIN {
   $Gentoo::Perl::Distmap::RecordSet::AUTHORITY = 'cpan:KENTNL';
 }
 {
-  $Gentoo::Perl::Distmap::RecordSet::VERSION = '0.1.0';
+  $Gentoo::Perl::Distmap::RecordSet::VERSION = '0.1.1';
 }
 
 # ABSTRACT: A collection of Record objects representing versions in >1 repos.
@@ -25,7 +25,7 @@ sub has_versions {
 }
 
 
-sub is_multi_repo {
+sub is_multi_repository {
   my $self = shift;
   my %seen;
   for my $record ( grep { $_->has_versions } @{ $self->records } ) {
@@ -36,10 +36,56 @@ sub is_multi_repo {
 }
 
 
-sub in_repo {
+sub in_repository {
   my ( $self, $repository ) = @_;
   return grep { $_->repository eq $repository }
     grep { $_->has_versions } @{ $self->records };
+}
+
+sub add_version {
+  my ( $self, %config ) = @_;
+  my %cloned;
+  for my $need (qw( category package version repository )) {
+    if ( exists $config{$need} ) {
+      $cloned{$need} = delete $config{$need};
+      next;
+    }
+    require Carp;
+    Carp::confess("Need parameter $need in config");
+  }
+  if ( keys %config ) {
+    require Carp;
+    Carp::confess( "Suplus keys in config: " . join q[,], keys %config );
+  }
+  my $record;
+  my (@found) = $self->in_repository( $cloned{repository} );
+  @found =
+    grep { $_->category eq $cloned{category} and $_->package eq $cloned{package} } @found;
+  if ( @found == 1 ) {
+    $record = $found[0];
+  }
+  elsif ( @found > 1 ) {
+    require Carp;
+    Carp::confess( sprintf "Bug: >1 result for ==category(%s) ==package(%s) ==repository(%s) ",
+      $cloned{category}, $cloned{package}, $cloned{repository} );
+  }
+  else {
+    $record = Gentoo::Perl::Distmap::Record->new(
+      category   => $cloned{category},
+      package    => $cloned{package},
+      repository => $cloned{repository},
+    );
+    push @{ $self->records }, $record;
+  }
+  if ( grep { $_ eq $cloned{version} } @{ $record->versions_gentoo } ) {
+    require Carp;
+    Carp::carp( "Tried to insert version $cloned{version} muliple times for "
+        . " package $cloned{package} category $cloned{category} repository $cloned{repository}" );
+    return;
+  }
+  push @{ $record->versions_gentoo }, $cloned{version};
+  return;
+
 }
 
 
@@ -75,7 +121,7 @@ Gentoo::Perl::Distmap::RecordSet - A collection of Record objects representing v
 
 =head1 VERSION
 
-version 0.1.0
+version 0.1.1
 
 =head1 ATTRIBUTES
 
@@ -91,13 +137,13 @@ version 0.1.0
 
 =head2 is_multi_repo
 
-	if ( $instance->is_multi_repo() ){
+	if ( $instance->is_multi_repository() ){
 
 	}
 
-=head2 in_repo
+=head2 in_repository
 
-	if ( my @records = $instance->in_repo('gentoo') ) {
+	if ( my @records = $instance->in_repository('gentoo') ) {
 		/* records from gentoo only */
 	}
 
