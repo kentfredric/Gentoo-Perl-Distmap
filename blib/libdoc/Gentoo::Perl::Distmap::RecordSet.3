@@ -142,7 +142,7 @@
 Gentoo::Perl::Distmap::RecordSet \- A collection of Record objects representing versions in >1 repos.
 .SH "VERSION"
 .IX Header "VERSION"
-version 0.1.0
+version 0.1.1
 .SH "ATTRIBUTES"
 .IX Header "ATTRIBUTES"
 .SS "records"
@@ -153,22 +153,32 @@ version 0.1.0
 .IX Subsection "has_versions"
 .Vb 1
 \&        if( $instance\->has_versions() ) {
-\&        
-\&        }
-.Ve
-.SS "is_multi_repo"
-.IX Subsection "is_multi_repo"
-.Vb 1
-\&        if ( $instance\->is_multi_repo() ){
 \&
 \&        }
 .Ve
-.SS "in_repo"
-.IX Subsection "in_repo"
+.SS "is_multi_repository"
+.IX Subsection "is_multi_repository"
+.Vb 1
+\&        if ( $instance\->is_multi_repository() ){
+\&
+\&        }
+.Ve
+.SS "in_repository"
+.IX Subsection "in_repository"
 .Vb 3
-\&        if ( my @records = $instance\->in_repo(\*(Aqgentoo\*(Aq) ) {
+\&        if ( my @records = $instance\->in_repository(\*(Aqgentoo\*(Aq) ) {
 \&                /* records from gentoo only */
 \&        }
+.Ve
+.SS "add_version"
+.IX Subsection "add_version"
+.Vb 6
+\&        $instance\->add_version(
+\&                category => \*(Aqgentoo\-category\*(Aq,
+\&                package  => \*(Aqgentoo\-package\*(Aq,
+\&                version  => \*(Aqgentoo\-version\*(Aq,
+\&                repository => \*(Aqgentoo\-repository\*(Aq,
+\&        );
 .Ve
 .SS "to_rec"
 .IX Subsection "to_rec"

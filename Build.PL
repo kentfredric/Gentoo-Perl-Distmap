@@ -23,7 +23,7 @@ my %module_build_args = (
     "Kent Fredric <kentfredric\@gmail.com>"
   ],
   "dist_name" => "Gentoo-Perl-Distmap",
-  "dist_version" => "0.1.0",
+  "dist_version" => "0.1.1",
   "license" => "perl",
   "module_name" => "Gentoo::Perl::Distmap",
   "recommends" => {},

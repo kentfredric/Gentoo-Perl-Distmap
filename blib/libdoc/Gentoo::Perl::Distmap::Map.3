@@ -142,7 +142,7 @@
 Gentoo::Perl::Distmap::Map \- A collection of CPAN dists mapped to Gentoo ones.
 .SH "VERSION"
 .IX Header "VERSION"
-version 0.1.0
+version 0.1.1
 .SH "ATTRIBUTES"
 .IX Header "ATTRIBUTES"
 .SS "store"
@@ -159,15 +159,26 @@ version 0.1.0
 .Vb 1
 \&        my @names = $instance\->mapped_dists();
 .Ve
-.SS "multi_repo_dists"
-.IX Subsection "multi_repo_dists"
+.SS "multi_repository_dists"
+.IX Subsection "multi_repository_dists"
 .Vb 1
-\&        my @names = $instance\->multi_repo_dists();
+\&        my @names = $instance\->multi_repository_dists();
 .Ve
-.SS "dists_in_repo"
-.IX Subsection "dists_in_repo"
+.SS "dists_in_repository"
+.IX Subsection "dists_in_repository"
 .Vb 1
-\&        my @names = $instance\->dists_in_repo(\*(Aqgentoo\*(Aq);
+\&        my @names = $instance\->dists_in_repository(\*(Aqgentoo\*(Aq);
+.Ve
+.SS "add_version"
+.IX Subsection "add_version"
+.Vb 7
+\&        $instance\->add_version(
+\&                distribution => \*(AqPerl\-Dist\-Name\*(Aq
+\&                category     => \*(Aqgentoo\-category\-name\*(Aq,
+\&                package      => \*(Aqgentoo\-package\-name\*(Aq,
+\&                version      => \*(Aqgentoo\-version\*(Aq,
+\&                repository   => \*(Aqgentoo\-repository\-name\*(Aq,
+\&        );
 .Ve
 .SS "to_rec"
 .IX Subsection "to_rec"

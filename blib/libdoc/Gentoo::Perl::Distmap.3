@@ -142,21 +142,21 @@
 Gentoo::Perl::Distmap \- A reader/writer for the metadata/perl/distmap.json file.
 .SH "VERSION"
 .IX Header "VERSION"
-version 0.1.0
+version 0.1.1
 .SH "SYNOPSIS"
 .IX Header "SYNOPSIS"
 .Vb 2
 \&        my $dm  = Gentoo::Perl::Distmap\->load(  file => \*(Aq../path/to/distmap.json\*(Aq );
 \&        $dm\->save( file => \*(Aq/tmp/foo.x\*(Aq );
 \&
-\&        for my $dist ( sort $dm\->dists_in_repo(\*(Aqgentoo\*(Aq) ) {
+\&        for my $dist ( sort $dm\->dists_in_repository(\*(Aqgentoo\*(Aq) ) {
 \&                /* see the upstream distnames visible in gentoo */
 \&        }
-\&        for my $dist ( sort $dm\->dists_in_repo(\*(Aqperl\-experimental\*(Aq) ) {
+\&        for my $dist ( sort $dm\->dists_in_repository(\*(Aqperl\-experimental\*(Aq) ) {
 \&                /* see the upstream distnames visible in perl\-experimental */
 \&        }
-\&        for my $dist ( sort $dm\->multi_repo_dists ) {
-\&                /* see the dists that exist in more than one repo */
+\&        for my $dist ( sort $dm\->multi_repository_dists ) {
+\&                /* see the dists that exist in more than one repository */
 \&        }
 \&\-       for my $dist ( sort $dm\->mapped_dists ) {
 \&                /* see the dists that have at least one version in the dataset */
@@ -201,14 +201,16 @@ Interface for creating/augmenting/comparing .json files still to be defined, bas
 .IX Header "ATTRIBUTE METHODS"
 .SS "map \-> map"
 .IX Subsection "map -> map"
-.SS "multi_repo_dists \-> map"
-.IX Subsection "multi_repo_dists -> map"
+.SS "multi_repository_dists \-> map"
+.IX Subsection "multi_repository_dists -> map"
 .SS "all_mapped_dists \-> map"
 .IX Subsection "all_mapped_dists -> map"
 .SS "mapped_dists \-> map"
 .IX Subsection "mapped_dists -> map"
-.SS "dists_in_repo \-> map"
-.IX Subsection "dists_in_repo -> map"
+.SS "dists_in_repository \-> map"
+.IX Subsection "dists_in_repository -> map"
+.SS "add_version \-> map"
+.IX Subsection "add_version -> map"
 .SH "PRIVATE METHODS"
 .IX Header "PRIVATE METHODS"
 .SS "_save_string"

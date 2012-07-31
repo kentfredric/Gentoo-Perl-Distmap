@@ -6,7 +6,7 @@ BEGIN {
   $Gentoo::Perl::Distmap::Map::AUTHORITY = 'cpan:KENTNL';
 }
 {
-  $Gentoo::Perl::Distmap::Map::VERSION = '0.1.0';
+  $Gentoo::Perl::Distmap::Map::VERSION = '0.1.1';
 }
 
 # ABSTRACT: A collection of CPAN dists mapped to Gentoo ones.
@@ -28,15 +28,39 @@ sub mapped_dists {
 }
 
 
-sub multi_repo_dists {
+sub multi_repository_dists {
   my ($self) = @_;
-  return grep { $self->store->{$_}->is_multi_repo } $self->all_mapped_dists;
+  return grep { $self->store->{$_}->is_multi_repository } $self->all_mapped_dists;
 }
 
 
-sub dists_in_repo {
-  my ( $self, $repo ) = @_;
-  return grep { $self->store->{$_}->in_repo($repo) } $self->all_mapped_dists;
+sub dists_in_repository {
+  my ( $self, $repository ) = @_;
+  return grep { $self->store->{$_}->in_repository($repository) } $self->all_mapped_dists;
+}
+
+
+sub add_version {
+  my ( $self, %config ) = @_;
+  my %cloned;
+  for my $need (qw( distribution category package version repository )) {
+    if ( exists $config{$need} ) {
+      $cloned{$need} = delete $config{$need};
+      next;
+    }
+    require Carp;
+    Carp::confess("Need parameter $need in config");
+  }
+  if ( keys %config ) {
+    require Carp;
+    Carp::confess( 'Surplus keys in config: ' . join q[,], keys %config );
+  }
+  if ( not exists $self->store->{ $cloned{distribution} } ) {
+    $self->store->{ $cloned{distribution} } = Gentoo::Perl::Distmap::RecordSet->new();
+  }
+  my $distro = delete $cloned{distribution};
+  $self->store->{$distro}->add_version(%cloned);
+  return $self->store->{$distro};
 }
 
 
@@ -81,7 +105,7 @@ Gentoo::Perl::Distmap::Map - A collection of CPAN dists mapped to Gentoo ones.
 
 =head1 VERSION
 
-version 0.1.0
+version 0.1.1
 
 =head1 ATTRIBUTES
 
@@ -97,13 +121,23 @@ version 0.1.0
 
 	my @names = $instance->mapped_dists();
 
-=head2 multi_repo_dists
+=head2 multi_repository_dists
 
-	my @names = $instance->multi_repo_dists();
+	my @names = $instance->multi_repository_dists();
 
-=head2 dists_in_repo
+=head2 dists_in_repository
 
-	my @names = $instance->dists_in_repo('gentoo');
+	my @names = $instance->dists_in_repository('gentoo');
+
+=head2 add_version
+
+	$instance->add_version(
+		distribution => 'Perl-Dist-Name'
+		category     => 'gentoo-category-name',
+		package      => 'gentoo-package-name',
+		version      => 'gentoo-version',
+		repository   => 'gentoo-repository-name',
+	);
 
 =head2 to_rec
 

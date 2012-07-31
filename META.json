@@ -62,19 +62,19 @@
    "provides" : {
       "Gentoo::Perl::Distmap" : {
          "file" : "lib/Gentoo/Perl/Distmap.pm",
-         "version" : "v0.1.0"
+         "version" : "v0.1.1"
       },
       "Gentoo::Perl::Distmap::Map" : {
          "file" : "lib/Gentoo/Perl/Distmap/Map.pm",
-         "version" : "v0.1.0"
+         "version" : "v0.1.1"
       },
       "Gentoo::Perl::Distmap::Record" : {
          "file" : "lib/Gentoo/Perl/Distmap/Record.pm",
-         "version" : "v0.1.0"
+         "version" : "v0.1.1"
       },
       "Gentoo::Perl::Distmap::RecordSet" : {
          "file" : "lib/Gentoo/Perl/Distmap/RecordSet.pm",
-         "version" : "v0.1.0"
+         "version" : "v0.1.1"
       }
    },
    "release_status" : "stable",
@@ -86,7 +86,7 @@
          "web" : "https://github.com/kentfredric/Gentoo-Perl-Distmap"
       }
    },
-   "version" : "0.1.0",
+   "version" : "0.1.1",
    "x_BuiltWith" : {
       "modules" : {
          "Carp" : "1.26",

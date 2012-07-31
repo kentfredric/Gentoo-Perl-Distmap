@@ -6,7 +6,7 @@ BEGIN {
   $Gentoo::Perl::Distmap::AUTHORITY = 'cpan:KENTNL';
 }
 {
-  $Gentoo::Perl::Distmap::VERSION = '0.1.0';
+  $Gentoo::Perl::Distmap::VERSION = '0.1.1';
 }
 
 # ABSTRACT: A reader/writer for the metadata/perl/distmap.json file.
@@ -23,7 +23,7 @@ use Sub::Quote qw( quote_sub );
 
 has map => ( rw,
   default => quote_sub(q| require Gentoo::Perl::Distmap::Map; Gentoo::Perl::Distmap::Map->new() |),
-  handles => [qw( multi_repo_dists all_mapped_dists mapped_dists dists_in_repo )],
+  handles => [qw( multi_repository_dists all_mapped_dists mapped_dists dists_in_repository add_version )],
 );
 
 
@@ -78,21 +78,21 @@ Gentoo::Perl::Distmap - A reader/writer for the metadata/perl/distmap.json file.
 
 =head1 VERSION
 
-version 0.1.0
+version 0.1.1
 
 =head1 SYNOPSIS
 
 	my $dm  = Gentoo::Perl::Distmap->load(  file => '../path/to/distmap.json' );
 	$dm->save( file => '/tmp/foo.x' );
 
-	for my $dist ( sort $dm->dists_in_repo('gentoo') ) {
+	for my $dist ( sort $dm->dists_in_repository('gentoo') ) {
 		/* see the upstream distnames visible in gentoo */
 	}
-	for my $dist ( sort $dm->dists_in_repo('perl-experimental') ) {
+	for my $dist ( sort $dm->dists_in_repository('perl-experimental') ) {
 		/* see the upstream distnames visible in perl-experimental */
 	}
-	for my $dist ( sort $dm->multi_repo_dists ) {
-		/* see the dists that exist in more than one repo */
+	for my $dist ( sort $dm->multi_repository_dists ) {
+		/* see the dists that exist in more than one repository */
 	}
 -	for my $dist ( sort $dm->mapped_dists ) {
 		/* see the dists that have at least one version in the dataset */
@@ -133,13 +133,15 @@ Interface for creating/augmenting/comparing .json files still to be defined, bas
 
 =head2 map -> map
 
-=head2 multi_repo_dists -> map
+=head2 multi_repository_dists -> map
 
 =head2 all_mapped_dists -> map
 
 =head2 mapped_dists -> map
 
-=head2 dists_in_repo -> map
+=head2 dists_in_repository -> map
+
+=head2 add_version -> map
 
 =head1 PRIVATE METHODS
 
