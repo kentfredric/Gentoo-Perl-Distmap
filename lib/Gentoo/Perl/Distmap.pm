@@ -62,6 +62,7 @@ sub encoder {
 }
 
 no Moo;
+no MooseX::Has::Sugar;
 
 1;
 

@@ -14,10 +14,12 @@ BEGIN {
 use Moo;
 use MooseX::Has::Sugar qw( rw required );
 
+
 has 'category'        => rw, required;
 has 'package'         => rw, required;
 has 'repository'      => rw, required;
 has 'versions_gentoo' => rw, required;
+
 
 sub add_version {
   my ( $self, @versions ) = @_;
@@ -25,9 +27,11 @@ sub add_version {
   return $self;
 }
 
+
 sub has_versions {
   return scalar @{ $_[0]->versions_gentoo };
 }
+
 
 sub enumerate_packages {
   my ($self) = @_;
@@ -40,6 +44,7 @@ sub enumerate_packages {
   return @out;
 }
 
+
 sub to_rec {
   my ($self) = @_;
   return {
@@ -49,6 +54,7 @@ sub to_rec {
     versions_gentoo => $self->versions_gentoo,
   };
 }
+
 
 sub from_rec {
   my ( $class, $rec ) = @_;
@@ -87,6 +93,40 @@ Gentoo::Perl::Distmap::Record - A Single Distmap Record
 =head1 VERSION
 
 version 0.1.0
+
+=head1 ATTRIBUTES
+
+=head2 category
+
+=head2 package
+
+=head2 repository
+
+=head2 versions_gentoo
+
+=head1 METHODS
+
+=head2 add_version
+
+=head2 has_versions
+
+=head2 enumerate_packages
+
+=head2 to_rec
+
+=head1 CLASS METHODS
+
+=head2 from_rec
+
+=head1 ATTRIBUTE METHODS
+
+=head2 category -> category
+
+=head2 package -> package
+
+=head2 repository -> repository
+
+=head2 versions_gentoo -> versions_gentoo
 
 =head1 AUTHOR
 

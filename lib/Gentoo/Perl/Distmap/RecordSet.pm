@@ -15,12 +15,15 @@ use Moo;
 use MooseX::Has::Sugar qw( rw );
 use Sub::Quote qw( quote_sub );
 
+
 has 'records' => rw, default => quote_sub(q{ [] });
+
 
 sub has_versions {
   my $self = shift;
   return scalar grep { $_->has_versions } @{ $self->records };
 }
+
 
 sub is_multi_repo {
   my $self = shift;
@@ -32,16 +35,19 @@ sub is_multi_repo {
   return;
 }
 
+
 sub in_repo {
   my ( $self, $repository ) = @_;
   return grep { $_->repository eq $repository }
     grep { $_->has_versions } @{ $self->records };
 }
 
+
 sub to_rec {
   my ($self) = @_;
   return [ map { $_->to_rec } @{ $self->records } ];
 }
+
 
 sub from_rec {
   my ( $class, $rec ) = @_;
@@ -53,8 +59,8 @@ sub from_rec {
   require Gentoo::Perl::Distmap::Record;
   return $class->new( records => [ map { Gentoo::Perl::Distmap::Record->from_rec($_) } @{$rec_clone} ] );
 }
-__PACKAGE__->meta->make_immutable;
-no Moose;
+no Moo;
+no MooseX::Has::Sugar;
 
 1;
 
@@ -70,6 +76,28 @@ Gentoo::Perl::Distmap::RecordSet - A collection of Record objects representing v
 =head1 VERSION
 
 version 0.1.0
+
+=head1 ATTRIBUTES
+
+=head2 records
+
+=head1 METHODS
+
+=head2 has_versions
+
+=head2 is_multi_repo
+
+=head2 in_repo
+
+=head2 to_rec
+
+=head1 CLASS METHODS
+
+=head2 from_rec
+
+=head1 ATTRIBUTE METHODS
+
+=head2 records -> records
 
 =head1 AUTHOR
 

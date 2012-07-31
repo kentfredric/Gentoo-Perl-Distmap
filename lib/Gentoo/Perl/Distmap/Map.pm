@@ -15,24 +15,30 @@ use Moo;
 use MooseX::Has::Sugar qw( rw );
 use Sub::Quote qw( quote_sub );
 
+
 has store => rw, default => quote_sub(q{ {} });
 
+
 sub all_mapped_dists { return keys %{ $_[0]->store } }
+
 
 sub mapped_dists {
   my ($self) = @_;
   return grep { $self->store->{$_}->has_versions } $self->all_mapped_dists;
 }
 
+
 sub multi_repo_dists {
   my ($self) = @_;
   return grep { $self->store->{$_}->is_multi_repo } $self->all_mapped_dists;
 }
 
+
 sub dists_in_repo {
   my ( $self, $repo ) = @_;
   return grep { $self->store->{$_}->in_repo($repo) } $self->all_mapped_dists;
 }
+
 
 sub to_rec {
   my ($self) = @_;
@@ -42,6 +48,7 @@ sub to_rec {
   }
   return $out;
 }
+
 
 sub from_rec {
   my ( $class, $rec ) = @_;
@@ -75,6 +82,30 @@ Gentoo::Perl::Distmap::Map - A collection of CPAN dists mapped to Gentoo ones.
 =head1 VERSION
 
 version 0.1.0
+
+=head1 ATTRIBUTES
+
+=head2 store
+
+=head1 METHODS
+
+=head2 all_mapped_dists
+
+=head2 mapped_dists
+
+=head2 multi_repo_dists
+
+=head2 dists_in_repo
+
+=head2 to_rec
+
+=head1 CLASS METHODS
+
+=head2 from_rec
+
+=head1 ATTRIBUTE METHODS
+
+=head2 store -> store
 
 =head1 AUTHOR
 

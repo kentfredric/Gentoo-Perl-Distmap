@@ -32,7 +32,6 @@ my %module_build_args = (
     "Carp" => 0,
     "JSON" => 0,
     "Moo" => 0,
-    "Moose" => 0,
     "MooseX::Has::Sugar" => 0,
     "Path::Class::File" => 0,
     "Sub::Quote" => 0,

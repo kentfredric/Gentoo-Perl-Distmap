@@ -58,7 +58,6 @@ eval { $v .= pmver('FindBin','any version') };
 eval { $v .= pmver('JSON','any version') };
 eval { $v .= pmver('Module::Build','0.4002') };
 eval { $v .= pmver('Moo','any version') };
-eval { $v .= pmver('Moose','any version') };
 eval { $v .= pmver('MooseX::Has::Sugar','any version') };
 eval { $v .= pmver('Path::Class::Dir','any version') };
 eval { $v .= pmver('Path::Class::File','any version') };
