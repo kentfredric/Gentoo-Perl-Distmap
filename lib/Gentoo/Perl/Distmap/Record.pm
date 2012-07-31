@@ -65,7 +65,7 @@ sub from_rec {
   );
   if ( keys %{$rec_clone} ) {
     require Carp;
-    Carp::cluck "Unknown keys : " . join q{,}, keys %{$rec_clone};
+    Carp::cluck( 'Unknown keys : ' . join q{,}, keys %{$rec_clone} );
   }
   return $instance;
 }
