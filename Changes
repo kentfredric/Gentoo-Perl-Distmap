@@ -1,6 +1,11 @@
 Release history for Gentoo-Perl-Distmap
 
 {{$NEXT}}
+ [API]
+ - Change all use of the term 'repo' to be 'repository' codewide.
+
+ [Features]
+ - add a `add_version` method.
 
 0.1.0 2012-07-31T20:41:46Z
  - First version.
