@@ -83,7 +83,7 @@ sub add_version {
   }
   if ( keys %config ) {
     require Carp;
-    Carp::confess( "Suplus keys in config: " . join q[,], keys %config );
+    Carp::confess( 'Surplus keys in config: ' . join q[,], keys %config );
   }
   if ( not exists $self->store->{ $cloned{distribution} } ) {
     $self->store->{ $cloned{distribution} } = Gentoo::Perl::Distmap::RecordSet->new();
