@@ -6,11 +6,16 @@ MANIFEST
 META.json
 META.yml
 README
+corpus/distmap.json
 dist.ini
 lib/Gentoo/Perl/Distmap.pm
+lib/Gentoo/Perl/Distmap/Map.pm
+lib/Gentoo/Perl/Distmap/Record.pm
+lib/Gentoo/Perl/Distmap/RecordSet.pm
 perlcritic.rc
 t/00-compile.t
 t/000-report-versions-tiny.t
+t/test_parse.t
 weaver.ini
 xt/author/critic.t
 xt/release/cpan-changes.t

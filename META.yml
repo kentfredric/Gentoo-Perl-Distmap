@@ -5,7 +5,9 @@ author:
 build_requires:
   File::Find: 0
   File::Temp: 0
+  FindBin: 0
   Module::Build: 0.4002
+  Path::Class::Dir: 0
   Test::More: 0.98
 configure_requires:
   Module::Build: 0.4002
@@ -20,11 +22,21 @@ provides:
   Gentoo::Perl::Distmap:
     file: lib/Gentoo/Perl/Distmap.pm
     version: v0.1.0
+  Gentoo::Perl::Distmap::Map:
+    file: lib/Gentoo/Perl/Distmap/Map.pm
+    version: v0.1.0
+  Gentoo::Perl::Distmap::Record:
+    file: lib/Gentoo/Perl/Distmap/Record.pm
+    version: v0.1.0
+  Gentoo::Perl::Distmap::RecordSet:
+    file: lib/Gentoo/Perl/Distmap/RecordSet.pm
+    version: v0.1.0
 requires:
-  Gentoo::Perl::Distmap::Map: 0
-  Gentoo::Perl::Distmap::Record: 0
+  Carp: 0
   JSON: 0
   Moo: 0
+  Moose: 0
+  MooseX::Has::Sugar: 0
   Path::Class::File: 0
   Sub::Quote: 0
   perl: v5.10.0
@@ -33,15 +45,18 @@ requires:
 version: 0.1.0
 x_BuiltWith:
   modules:
+    Carp: 1.26
     Dist::Zilla::PluginBundle::Author::KENTNL: 1.4.2
     Dist::Zilla::PluginBundle::Author::KENTNL::Lite: 'NA(possibly not installed)'
     File::Find: 1.20
     File::Temp: 0.22
-    Gentoo::Perl::Distmap::Map: 'NA(possibly not installed)'
-    Gentoo::Perl::Distmap::Record: 'NA(possibly not installed)'
+    FindBin: 1.51
     JSON: 2.53
     Module::Build: 0.4002
     Moo: 1.000001
+    Moose: 2.0603
+    MooseX::Has::Sugar: 0.05070420
+    Path::Class::Dir: 0.26
     Path::Class::File: 0.26
     Sub::Quote: NA(undef)
     Test::More: 0.98
