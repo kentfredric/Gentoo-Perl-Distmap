@@ -24,7 +24,7 @@ sub multi_repo_dists {
 
 sub dists_in_repo {
   my ( $self, $repo ) = @_;
-  return grep { $self->store->{$_}->in_repo( $repo ) } $self->all_mapped_dists;
+  return grep { $self->store->{$_}->in_repo($repo) } $self->all_mapped_dists;
 }
 
 sub to_rec {
@@ -46,7 +46,7 @@ sub from_rec {
   my $in;
   require Gentoo::Perl::Distmap::RecordSet;
   for my $dist ( keys %{$rec_clone} ) {
-    $in->{$dist} = Gentoo::Perl::Distmap::RecordSet->from_rec($rec_clone->{$dist}) 
+    $in->{$dist} = Gentoo::Perl::Distmap::RecordSet->from_rec( $rec_clone->{$dist} );
   }
   return $class->new( store => $in, );
 }
