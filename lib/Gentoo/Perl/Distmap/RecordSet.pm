@@ -6,9 +6,10 @@ package Gentoo::Perl::Distmap::RecordSet;
 # ABSTRACT: A collection of Record objects representing versions in >1 repos.
 
 use Moo;
+use MooseX::Has::Sugar qw( rw );
 use Sub::Quote qw( quote_sub );
 
-has 'records' => ( is => rw =>, default => quote_sub(q{ [] }) );
+has 'records' => rw, default => quote_sub(q{ [] });
 
 sub has_versions {
   my $self = shift;

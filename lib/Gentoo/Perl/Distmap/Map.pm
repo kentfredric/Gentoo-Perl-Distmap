@@ -6,9 +6,10 @@ package Gentoo::Perl::Distmap::Map;
 # ABSTRACT: A collection of CPAN dists mapped to Gentoo ones.
 
 use Moo;
+use MooseX::Has::Sugar qw( rw );
 use Sub::Quote qw( quote_sub );
 
-has store => ( is => rw =>, default => quote_sub(q{ {} }) );
+has store => rw, default => quote_sub(q{ {} });
 
 sub all_mapped_dists { return keys %{ $_[0]->store } }
 
