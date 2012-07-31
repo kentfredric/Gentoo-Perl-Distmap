@@ -13,20 +13,15 @@ my $dm = Gentoo::Perl::Distmap->load( file => $corpus->file('distmap.json') );
 pass("loaded without failing");
 
 my $dmx = Gentoo::Perl::Distmap->new();
-$dmx->add_version(
-  distribution => Test   =>,
-  category     => fake   =>,
-  package      => fake   =>,
-  version      => '0.01' =>,
-  repository   => 'fake',
-);
-$dmx->add_version(
-  distribution => Test   =>,
-  category     => fake   =>,
-  package      => fake   =>,
-  version      => '0.01' =>,
-  repository   => 'fake',
-);
+for my $i ( 0 .. 200 ) {
+  $dmx->add_version(
+    distribution => Test       =>,
+    category     => fake       =>,
+    package      => fake       =>,
+    version      => '0.0' . $i =>,
+    repository   => 'fake',
+  );
+}
 
 use Data::Dump qw(pp);
 say pp($dmx);
