@@ -16,13 +16,13 @@ use Gentoo::Perl::Distmap::Record;
 use Gentoo::Perl::Distmap::Map;
 
 use Moo;
+use MooseX::Has::Sugar qw( rw );
 use Sub::Quote qw( quote_sub );
 
 
-has 'map' => (
-  is      => rw =>,
+has map => ( rw,
   default => quote_sub(q| require Gentoo::Perl::Distmap::Map; Gentoo::Perl::Distmap::Map->new() |),
-  handles => [qw( multi_repo_dists all_mapped_dists mapped_dists dists_in_repo )],
+  handles => [qw( multi_repo_dists all_mapped_dists mapped_dists dists_in_repo )]
 );
 
 sub load {

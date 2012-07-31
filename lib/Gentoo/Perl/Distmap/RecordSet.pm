@@ -11,11 +11,11 @@ BEGIN {
 
 # ABSTRACT: A collection of Record objects representing versions in >1 repos.
 
-
 use Moo;
+use MooseX::Has::Sugar qw( rw );
 use Sub::Quote qw( quote_sub );
 
-has 'records' => ( is => rw =>, default => quote_sub(q{ [] }) );
+has 'records' => rw, default => quote_sub(q{ [] });
 
 sub has_versions {
   my $self = shift;
@@ -26,7 +26,7 @@ sub is_multi_repo {
   my $self = shift;
   my %seen;
   for my $record ( grep { $_->has_versions } @{ $self->records } ) {
-  	$seen{ $record->repository }++;
+    $seen{ $record->repository }++;
   }
   return 1 if scalar keys %seen > 1;
   return;
@@ -34,8 +34,8 @@ sub is_multi_repo {
 
 sub in_repo {
   my ( $self, $repository ) = @_;
-  return grep { $_->repository eq $repository } 
-  	 grep { $_->has_versions } @{ $self->records };
+  return grep { $_->repository eq $repository }
+    grep { $_->has_versions } @{ $self->records };
 }
 
 sub to_rec {

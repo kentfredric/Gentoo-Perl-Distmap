@@ -30,15 +30,16 @@ sub has_versions {
 }
 
 sub enumerate_packages {
-	my( $self ) = @_;
-	my @out;
-	my $prefix = sprintf '=%s/%s-', $self->category, $self->package;
-	my $suffix = sprintf '::%s', $self->repository;
-	for my $version (@{ $self->versions_gentoo }) {
-		push @out, $prefix . $version . $suffix;
-	}
-	return @out;
+  my ($self) = @_;
+  my @out;
+  my $prefix = sprintf '=%s/%s-', $self->category, $self->package;
+  my $suffix = sprintf '::%s', $self->repository;
+  for my $version ( @{ $self->versions_gentoo } ) {
+    push @out, $prefix . $version . $suffix;
+  }
+  return @out;
 }
+
 sub to_rec {
   my ($self) = @_;
   return {
