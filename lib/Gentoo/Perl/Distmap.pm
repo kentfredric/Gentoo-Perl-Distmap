@@ -20,10 +20,12 @@ use MooseX::Has::Sugar qw( rw );
 use Sub::Quote qw( quote_sub );
 
 
+
 has map => ( rw,
   default => quote_sub(q| require Gentoo::Perl::Distmap::Map; Gentoo::Perl::Distmap::Map->new() |),
   handles => [qw( multi_repo_dists all_mapped_dists mapped_dists dists_in_repo )],
 );
+
 
 sub load {
   my ( $self, $method, $source ) = @_;
@@ -34,18 +36,22 @@ sub load {
   );
 }
 
+
 sub save {
   my ( $self, $method, $target ) = @_;
   return $self->can( '_save_' . $method )->( $self, $self->encoder->encode( $self->map->to_rec ), $target );
 }
 
+
 sub _save_string     { return $_[1] }
 sub _save_filehandle { return $_[2]->print( $_[1] ) }
 sub _save_file       { require Path::Class::File; return $_[0]->_save_filehandle( $_[1], Path::Class::File->new( $_[2] )->openw() ) }
 
+
 sub _load_file { require Path::Class::File; return scalar Path::Class::File->new( $_[2] )->slurp() }
 sub _load_filehandle { local $/ = undef; return scalar $_[2]->getline }
 sub _load_string { return $_[2] }
+
 
 sub decoder {
   return state $json = do { require JSON; JSON->new->pretty->utf8->canonical; }
@@ -93,6 +99,50 @@ version 0.1.0
 	}
 
 Interface for creating/augmenting/comparing .json files still to be defined, basic functionality only at this time.
+
+=head1 ATTRIBUTES
+
+=head2 map
+
+=head1 METHODS
+
+=head2 save
+
+=head1 CLASS METHODS
+
+=head2 load
+
+=head2 decoder
+
+=head2 encoder
+
+=head1 ATTRIBUTE METHODS
+
+=head2 map -> map
+
+=head2 multi_repo_dists -> map
+
+=head2 all_mapped_dists -> map
+
+=head2 mapped_dists -> map
+
+=head2 dists_in_repo -> map
+
+=head1 PRIVATE METHODS
+
+=head2 _save_string
+
+=head2 _save_filehandle
+
+=head2 _save_file
+
+=head1 PRIVATE CLASS METHODS
+
+=head2 _load_file
+
+=head2 _load_filehandle
+
+=head2 _load_string
 
 =head1 AUTHOR
 

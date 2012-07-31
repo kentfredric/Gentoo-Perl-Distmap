@@ -26,6 +26,28 @@ SYNOPSIS
     Interface for creating/augmenting/comparing .json files still to be
     defined, basic functionality only at this time.
 
+ATTRIBUTES
+  map
+METHODS
+  save
+CLASS METHODS
+  load
+  decoder
+  encoder
+ATTRIBUTE METHODS
+  map -> map
+  multi_repo_dists -> map
+  all_mapped_dists -> map
+  mapped_dists -> map
+  dists_in_repo -> map
+PRIVATE METHODS
+  _save_string
+  _save_filehandle
+  _save_file
+PRIVATE CLASS METHODS
+  _load_file
+  _load_filehandle
+  _load_string
 AUTHOR
     Kent Fredric <kentfredric@gmail.com>
 
