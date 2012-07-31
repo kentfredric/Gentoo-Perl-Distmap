@@ -36,26 +36,60 @@ sub mapped_dists {
   return grep { $self->store->{$_}->has_versions } $self->all_mapped_dists;
 }
 
-=method multi_repo_dists
+=method multi_repository_dists
 
-	my @names = $instance->multi_repo_dists();
+	my @names = $instance->multi_repository_dists();
 
 =cut
 
-sub multi_repo_dists {
+sub multi_repository_dists {
   my ($self) = @_;
-  return grep { $self->store->{$_}->is_multi_repo } $self->all_mapped_dists;
+  return grep { $self->store->{$_}->is_multi_repository } $self->all_mapped_dists;
 }
 
-=method dists_in_repo
+=method dists_in_repository
 
-	my @names = $instance->dists_in_repo('gentoo');
+	my @names = $instance->dists_in_repository('gentoo');
 
 =cut
 
-sub dists_in_repo {
-  my ( $self, $repo ) = @_;
-  return grep { $self->store->{$_}->in_repo($repo) } $self->all_mapped_dists;
+sub dists_in_repository {
+  my ( $self, $repository ) = @_;
+  return grep { $self->store->{$_}->in_repository($repository) } $self->all_mapped_dists;
+}
+
+=method add_version
+
+	$instance->add_version(
+		distribution => 'Perl-Dist-Name'
+		category     => 'gentoo-category-name',
+		package      => 'gentoo-package-name',
+		version      => 'gentoo-version',
+		repository   => 'gentoo-repository-name',
+	);
+
+=cut
+sub add_version {
+	my ( $self, %config ) = @_;
+	my %cloned;
+	for my $need ( qw( distribution category package version repository ) ) {
+		if ( exists $config{$need} ){
+			$cloned{$need} = delete $config{$need};
+			next;
+		}
+		require Carp;
+		Carp::confess("Need parameter $need in config");
+	}
+	if ( keys %config ){ 
+		require Carp;
+		Carp::confess("Suplus keys in config: " . join q[,], keys %config );
+	}
+	if ( not exists $self->store->{ $cloned{distribution} } ){
+		$self->store->{ $cloned{distribution} } = Gentoo::Perl::Distmap::RecordSet->new();
+	}
+	my $distro = delete $cloned{distribution};
+	$self->store->{ $distro }->add_version(%cloned);
+	return $self->store->{$distro};
 }
 
 =method to_rec
@@ -63,6 +97,7 @@ sub dists_in_repo {
 	my $datastructure = $instance->to_rec
 
 =cut
+
 
 sub to_rec {
   my ($self) = @_;

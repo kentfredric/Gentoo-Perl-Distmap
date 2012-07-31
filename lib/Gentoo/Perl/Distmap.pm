@@ -18,14 +18,14 @@ use Sub::Quote qw( quote_sub );
 	my $dm  = Gentoo::Perl::Distmap->load(  file => '../path/to/distmap.json' );
 	$dm->save( file => '/tmp/foo.x' );
 
-	for my $dist ( sort $dm->dists_in_repo('gentoo') ) {
+	for my $dist ( sort $dm->dists_in_repository('gentoo') ) {
 		/* see the upstream distnames visible in gentoo */
 	}
-	for my $dist ( sort $dm->dists_in_repo('perl-experimental') ) {
+	for my $dist ( sort $dm->dists_in_repository('perl-experimental') ) {
 		/* see the upstream distnames visible in perl-experimental */
 	}
-	for my $dist ( sort $dm->multi_repo_dists ) {
-		/* see the dists that exist in more than one repo */
+	for my $dist ( sort $dm->multi_repository_dists ) {
+		/* see the dists that exist in more than one repository */
 	}
 -	for my $dist ( sort $dm->mapped_dists ) {
 		/* see the dists that have at least one version in the dataset */
@@ -41,19 +41,21 @@ Interface for creating/augmenting/comparing .json files still to be defined, bas
 
 =attr_method map -> map
 
-=attr_method multi_repo_dists -> map
+=attr_method multi_repository_dists -> map
 
 =attr_method all_mapped_dists -> map
 
 =attr_method mapped_dists -> map
 
-=attr_method dists_in_repo -> map
+=attr_method dists_in_repository -> map
+
+=attr_method add_version -> map
 
 =cut
 
 has map => ( rw,
   default => quote_sub(q| require Gentoo::Perl::Distmap::Map; Gentoo::Perl::Distmap::Map->new() |),
-  handles => [qw( multi_repo_dists all_mapped_dists mapped_dists dists_in_repo )],
+  handles => [qw( multi_repository_dists all_mapped_dists mapped_dists dists_in_repository add_version )],
 );
 
 =classmethod load

@@ -7,6 +7,7 @@ package Gentoo::Perl::Distmap::Record;
 
 use Moo;
 use MooseX::Has::Sugar qw( rw required );
+use Sub::Quote qw( quote_sub );
 
 =attr category
 
@@ -29,7 +30,7 @@ use MooseX::Has::Sugar qw( rw required );
 has 'category'        => rw, required;
 has 'package'         => rw, required;
 has 'repository'      => rw, required;
-has 'versions_gentoo' => rw, required;
+has 'versions_gentoo' => rw, default => quote_sub(q|[]|);
 
 =method add_version
 
