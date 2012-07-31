@@ -50,7 +50,6 @@
       },
       "test" : {
          "requires" : {
-            "Data::Dump" : "0",
             "File::Find" : "0",
             "File::Temp" : "0",
             "FindBin" : "0",
@@ -91,7 +90,6 @@
    "x_BuiltWith" : {
       "modules" : {
          "Carp" : "1.26",
-         "Data::Dump" : "1.21",
          "Dist::Zilla::PluginBundle::Author::KENTNL" : "1.4.3",
          "Dist::Zilla::PluginBundle::Author::KENTNL::Lite" : "NA(possibly not installed)",
          "File::Find" : "1.20",

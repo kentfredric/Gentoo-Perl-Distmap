@@ -132,7 +132,7 @@ version 0.1.1
 =head2 has_versions
 
 	if( $instance->has_versions() ) {
-	
+
 	}
 
 =head2 is_multi_repo

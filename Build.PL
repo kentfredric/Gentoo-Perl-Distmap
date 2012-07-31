@@ -7,7 +7,6 @@ use Module::Build 0.3601;
 
 my %module_build_args = (
   "build_requires" => {
-    "Data::Dump" => 0,
     "File::Find" => 0,
     "File::Temp" => 0,
     "FindBin" => 0,

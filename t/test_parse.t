@@ -22,8 +22,7 @@ for my $i ( 0 .. 200 ) {
     repository   => 'fake',
   );
 }
+pass("added 200 new versions successfully");
+is( length $dmx->save( string => ), 4483, "Saved JSON is expected 4483 chars long" );
 
-use Data::Dump qw(pp);
-say pp($dmx);
-say $dmx->save( string => );
 done_testing();

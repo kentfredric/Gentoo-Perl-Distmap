@@ -1,6 +1,6 @@
 Release history for Gentoo-Perl-Distmap
 
-0.1.1 2012-07-31T21:28:36Z
+0.1.1 2012-07-31T21:32:05Z
  [API]
  - Change all use of the term 'repo' to be 'repository' codewide.
 
