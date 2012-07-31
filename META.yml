@@ -42,11 +42,14 @@ requires:
   perl: v5.10.0
   strict: 0
   warnings: 0
+resources:
+  homepage: https://github.com/kentfredric/Gentoo-Perl-Distmap
+  repository: https://github.com/kentfredric/Gentoo-Perl-Distmap.git
 version: 0.1.0
 x_BuiltWith:
   modules:
     Carp: 1.26
-    Dist::Zilla::PluginBundle::Author::KENTNL: 1.4.2
+    Dist::Zilla::PluginBundle::Author::KENTNL: 1.4.3
     Dist::Zilla::PluginBundle::Author::KENTNL::Lite: 'NA(possibly not installed)'
     File::Find: 1.20
     File::Temp: 0.22
@@ -217,7 +220,7 @@ x_Dist_Zilla:
     -
       class: Dist::Zilla::Plugin::Author::KENTNL::MinimumPerl
       name: '@Author::KENTNL/Author::KENTNL::MinimumPerl'
-      version: 1.4.2
+      version: 1.4.3
     -
       class: Dist::Zilla::Plugin::Author::KENTNL::Prereqs::Latest::Selective
       name: '@Author::KENTNL/Author::KENTNL::Prereqs::Latest::Selective'
