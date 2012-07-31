@@ -12,7 +12,8 @@ my %module_build_args = (
     "FindBin" => 0,
     "Module::Build" => "0.4002",
     "Path::Class::Dir" => 0,
-    "Test::More" => "0.98"
+    "Test::More" => "0.98",
+    "perl" => "v5.10.0"
   },
   "configure_requires" => {
     "Module::Build" => "0.4002"

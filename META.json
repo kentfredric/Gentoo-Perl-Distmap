@@ -55,7 +55,8 @@
             "File::Temp" : "0",
             "FindBin" : "0",
             "Path::Class::Dir" : "0",
-            "Test::More" : "0.98"
+            "Test::More" : "0.98",
+            "perl" : "v5.10.0"
          }
       }
    },

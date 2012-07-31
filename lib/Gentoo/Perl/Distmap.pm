@@ -11,7 +11,7 @@ BEGIN {
 
 # ABSTRACT: A reader/writer for the metadata/perl/distmap.json file.
 
-use 5.10.0;
+use 5.010000;
 use Gentoo::Perl::Distmap::Record;
 use Gentoo::Perl::Distmap::Map;
 
