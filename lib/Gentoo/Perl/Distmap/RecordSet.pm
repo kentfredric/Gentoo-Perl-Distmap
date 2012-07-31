@@ -42,6 +42,7 @@ sub in_repository {
     grep { $_->has_versions } @{ $self->records };
 }
 
+
 sub add_version {
   my ( $self, %config ) = @_;
   my %cloned;
@@ -136,7 +137,7 @@ version 0.1.1
 
 	}
 
-=head2 is_multi_repo
+=head2 is_multi_repository
 
 	if ( $instance->is_multi_repository() ){
 
@@ -147,6 +148,15 @@ version 0.1.1
 	if ( my @records = $instance->in_repository('gentoo') ) {
 		/* records from gentoo only */
 	}
+
+=head2 add_version
+
+	$instance->add_version(
+		category => 'gentoo-category',
+		package  => 'gentoo-package',
+		version  => 'gentoo-version',
+		repository => 'gentoo-repository',
+	);
 
 =head2 to_rec
 
