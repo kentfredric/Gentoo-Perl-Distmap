@@ -22,7 +22,7 @@ use Sub::Quote qw( quote_sub );
 
 has map => ( rw,
   default => quote_sub(q| require Gentoo::Perl::Distmap::Map; Gentoo::Perl::Distmap::Map->new() |),
-  handles => [qw( multi_repo_dists all_mapped_dists mapped_dists dists_in_repo )]
+  handles => [qw( multi_repo_dists all_mapped_dists mapped_dists dists_in_repo )],
 );
 
 sub load {
@@ -40,8 +40,8 @@ sub save {
 }
 
 sub _save_string     { return $_[1] }
-sub _save_filehandle { $_[2]->print( $_[1] ) }
-sub _save_file       { require Path::Class::File; $_[0]->_save_filehandle( $_[1], Path::Class::File->new( $_[2] )->openw() ) }
+sub _save_filehandle { return $_[2]->print( $_[1] ) }
+sub _save_file       { require Path::Class::File; return $_[0]->_save_filehandle( $_[1], Path::Class::File->new( $_[2] )->openw() ) }
 
 sub _load_file { require Path::Class::File; return scalar Path::Class::File->new( $_[2] )->slurp() }
 sub _load_filehandle { local $/ = undef; return scalar $_[2]->getline }
