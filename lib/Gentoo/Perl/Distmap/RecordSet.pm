@@ -101,6 +101,7 @@ sub add_version {
       $cloned{category}, $cloned{package}, $cloned{repository} );
   }
   else {
+    require Gentoo::Perl::Distmap::Record;
     $record = Gentoo::Perl::Distmap::Record->new(
       category   => $cloned{category},
       package    => $cloned{package},

@@ -8,7 +8,6 @@ package Gentoo::Perl::Distmap::Map;
 use Moo;
 use MooseX::Has::Sugar qw( rw );
 use Sub::Quote qw( quote_sub );
-
 =attr store
 
 =attr_method store -> store
@@ -85,7 +84,9 @@ sub add_version {
     require Carp;
     Carp::confess( 'Surplus keys in config: ' . join q[,], keys %config );
   }
+
   if ( not exists $self->store->{ $cloned{distribution} } ) {
+    require Gentoo::Perl::Distmap::RecordSet;
     $self->store->{ $cloned{distribution} } = Gentoo::Perl::Distmap::RecordSet->new();
   }
   my $distro = delete $cloned{distribution};
