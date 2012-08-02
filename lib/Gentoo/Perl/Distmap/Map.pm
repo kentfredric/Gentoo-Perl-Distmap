@@ -6,7 +6,7 @@ BEGIN {
   $Gentoo::Perl::Distmap::Map::AUTHORITY = 'cpan:KENTNL';
 }
 {
-  $Gentoo::Perl::Distmap::Map::VERSION = '0.1.1';
+  $Gentoo::Perl::Distmap::Map::VERSION = '0.1.2';
 }
 
 # ABSTRACT: A collection of CPAN dists mapped to Gentoo ones.
@@ -14,7 +14,6 @@ BEGIN {
 use Moo;
 use MooseX::Has::Sugar qw( rw );
 use Sub::Quote qw( quote_sub );
-
 
 has store => rw, default => quote_sub(q{ {} });
 
@@ -55,7 +54,9 @@ sub add_version {
     require Carp;
     Carp::confess( 'Surplus keys in config: ' . join q[,], keys %config );
   }
+
   if ( not exists $self->store->{ $cloned{distribution} } ) {
+    require Gentoo::Perl::Distmap::RecordSet;
     $self->store->{ $cloned{distribution} } = Gentoo::Perl::Distmap::RecordSet->new();
   }
   my $distro = delete $cloned{distribution};
@@ -105,7 +106,7 @@ Gentoo::Perl::Distmap::Map - A collection of CPAN dists mapped to Gentoo ones.
 
 =head1 VERSION
 
-version 0.1.1
+version 0.1.2
 
 =head1 ATTRIBUTES
 

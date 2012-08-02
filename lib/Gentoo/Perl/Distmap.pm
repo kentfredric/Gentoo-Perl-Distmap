@@ -6,15 +6,12 @@ BEGIN {
   $Gentoo::Perl::Distmap::AUTHORITY = 'cpan:KENTNL';
 }
 {
-  $Gentoo::Perl::Distmap::VERSION = '0.1.1';
+  $Gentoo::Perl::Distmap::VERSION = '0.1.2';
 }
 
 # ABSTRACT: A reader/writer for the metadata/perl/distmap.json file.
 
 use 5.010000;
-use Gentoo::Perl::Distmap::Record;
-use Gentoo::Perl::Distmap::Map;
-
 use Moo;
 use MooseX::Has::Sugar qw( rw );
 use Sub::Quote qw( quote_sub );
@@ -29,6 +26,7 @@ has map => ( rw,
 
 sub load {
   my ( $self, $method, $source ) = @_;
+  require Gentoo::Perl::Distmap::Map;
   return $self->new(
     map => Gentoo::Perl::Distmap::Map->from_rec(
       $self->decoder->decode( $self->can( '_load_' . $method )->( $self, $method, $source ) )
@@ -78,7 +76,7 @@ Gentoo::Perl::Distmap - A reader/writer for the metadata/perl/distmap.json file.
 
 =head1 VERSION
 
-version 0.1.1
+version 0.1.2
 
 =head1 SYNOPSIS
 
