@@ -6,7 +6,7 @@ BEGIN {
   $Gentoo::Perl::Distmap::Record::AUTHORITY = 'cpan:KENTNL';
 }
 {
-  $Gentoo::Perl::Distmap::Record::VERSION = '0.1.1';
+  $Gentoo::Perl::Distmap::Record::VERSION = '0.1.2';
 }
 
 # ABSTRACT: A Single Distmap Record
@@ -93,7 +93,7 @@ Gentoo::Perl::Distmap::Record - A Single Distmap Record
 
 =head1 VERSION
 
-version 0.1.1
+version 0.1.2
 
 =head1 ATTRIBUTES
 
