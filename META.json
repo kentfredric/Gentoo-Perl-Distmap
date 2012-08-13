@@ -38,9 +38,11 @@
       "runtime" : {
          "requires" : {
             "Carp" : "0",
-            "Gentoo::Perl::Distmap::Role::Serialize" : "0",
+            "Data::Dump" : "0",
+            "Digest::SHA" : "0",
             "JSON" : "0",
             "Moo" : "0",
+            "Moo::Role" : "0",
             "MooseX::Has::Sugar" : "0",
             "Path::Class::File" : "0",
             "Sub::Quote" : "0",
@@ -76,6 +78,10 @@
       "Gentoo::Perl::Distmap::RecordSet" : {
          "file" : "lib/Gentoo/Perl/Distmap/RecordSet.pm",
          "version" : "v0.1.3"
+      },
+      "Gentoo::Perl::Distmap::Role::Serialize" : {
+         "file" : "lib/Gentoo/Perl/Distmap/Role/Serialize.pm",
+         "version" : "v0.1.3"
       }
    },
    "release_status" : "stable",
@@ -91,15 +97,17 @@
    "x_BuiltWith" : {
       "modules" : {
          "Carp" : "1.26",
+         "Data::Dump" : "1.21",
+         "Digest::SHA" : "5.71",
          "Dist::Zilla::PluginBundle::Author::KENTNL" : "1.5.0",
          "Dist::Zilla::PluginBundle::Author::KENTNL::Lite" : "NA(possibly not installed)",
          "File::Find" : "1.20",
          "File::Temp" : "0.22",
          "FindBin" : "1.51",
-         "Gentoo::Perl::Distmap::Role::Serialize" : "NA(possibly not installed)",
          "JSON" : "2.53",
          "Module::Build" : "0.4002",
          "Moo" : "1.000003",
+         "Moo::Role" : "NA(undef)",
          "MooseX::Has::Sugar" : "0.05070421",
          "Path::Class::Dir" : "0.26",
          "Path::Class::File" : "0.26",
