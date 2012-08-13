@@ -21,7 +21,7 @@ with 'Gentoo::Perl::Distmap::Role::Serialize';
 has store => rw, default => quote_sub(q{ {} });
 
 
-sub all_mapped_dists { return sort keys %{ $_[0]->store } }
+sub all_mapped_dists { return (my (@items) = sort keys %{ $_[0]->store } ) }
 
 sub all_mapped_dists_data {
   return map { $_[0]->store->{$_} } $_[0]->all_mapped_dists;
