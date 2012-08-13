@@ -13,8 +13,12 @@ BEGIN {
 
 use Moo::Role;
 
+
 requires to_rec   =>;
+
+
 requires from_rec =>;
+
 
 sub hash {
   my ($self) = @_;
@@ -40,6 +44,20 @@ Gentoo::Perl::Distmap::Role::Serialize - use Moo::Role;
 =head1 VERSION
 
 version 0.1.3
+
+=head1 ROLE-REQUIRED METHODS
+
+=head2 to_rec
+
+=head2 from_rec
+
+=head1 METHODS
+
+=head2 hash
+
+Returns SHA1 of pp($instance->to_rec)
+
+  $astring = $instance->hash()
 
 =head1 AUTHOR
 
