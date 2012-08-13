@@ -3,12 +3,29 @@ use warnings;
 
 package Gentoo::Perl::Distmap::Role::Serialize;
 
-# ABSTRACT:
+# ABSTRACT: Basic utilities for serialising/sorting/indexing Distmap nodes.
 
 use Moo::Role;
 
+=role_requires to_rec
+
+=cut
+
 requires to_rec   =>;
+
+=role_requires from_rec
+
+=cut
+
 requires from_rec =>;
+
+=method hash
+
+Returns SHA1 of pp($instance->to_rec)
+
+  $astring = $instance->hash()
+
+=cut
 
 sub hash {
   my ($self) = @_;
