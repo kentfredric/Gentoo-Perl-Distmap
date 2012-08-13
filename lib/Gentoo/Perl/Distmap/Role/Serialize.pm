@@ -11,7 +11,7 @@ use Moo::Role;
 
 =cut
 
-requires to_rec   =>;
+requires to_rec =>;
 
 =role_requires from_rec
 
