@@ -1,6 +1,9 @@
 Release history for Gentoo-Perl-Distmap
 
 {{$NEXT}}
+ [Features]
+ - Add ->hash method on various things.
+ - Add various data fetching methods on maps
 
 0.1.2 2012-08-02T11:03:53Z
  [Bugs]
