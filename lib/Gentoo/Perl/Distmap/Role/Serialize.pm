@@ -14,7 +14,7 @@ BEGIN {
 use Moo::Role;
 
 
-requires to_rec   =>;
+requires to_rec =>;
 
 
 requires from_rec =>;
