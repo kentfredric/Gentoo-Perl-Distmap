@@ -9,6 +9,8 @@ use Moo;
 use MooseX::Has::Sugar qw( rw );
 use Sub::Quote qw( quote_sub );
 
+with 'Gentoo::Perl::Distmap::Role::Serialize';
+
 =attr records
 
 =attr_method records -> records
@@ -147,6 +149,7 @@ sub from_rec {
   require Gentoo::Perl::Distmap::Record;
   return $class->new( records => [ map { Gentoo::Perl::Distmap::Record->from_rec($_) } @{$rec_clone} ] );
 }
+
 no Moo;
 no MooseX::Has::Sugar;
 

@@ -9,6 +9,8 @@ use Moo;
 use MooseX::Has::Sugar qw( rw required );
 use Sub::Quote qw( quote_sub );
 
+with 'Gentoo::Perl::Distmap::Role::Serialize';
+
 =attr category
 
 =attr_method category -> category

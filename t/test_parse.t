@@ -25,4 +25,7 @@ for my $i ( 0 .. 200 ) {
 pass("added 200 new versions successfully");
 is( length $dmx->save( string => ), 4483, "Saved JSON is expected 4483 chars long" );
 
+my $h = $dm->map->hash;
+is( $h, 'pzV95dIOgbtiZUkQN6q4NeKv43c', "Generated Hash is consistent" );
+
 done_testing();
