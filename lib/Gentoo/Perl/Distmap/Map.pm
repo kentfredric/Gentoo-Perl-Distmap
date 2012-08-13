@@ -17,15 +17,25 @@ use Sub::Quote qw( quote_sub );
 
 with 'Gentoo::Perl::Distmap::Role::Serialize';
 
+
 has store => rw, default => quote_sub(q{ {} });
 
 
-sub all_mapped_dists { return keys %{ $_[0]->store } }
+sub all_mapped_dists { return sort keys %{ $_[0]->store } }
+
+sub all_mapped_dists_data {
+  return map { $_[0]->store->{$_} } $_[0]->all_mapped_dists;
+}
 
 
 sub mapped_dists {
   my ($self) = @_;
   return grep { $self->store->{$_}->has_versions } $self->all_mapped_dists;
+}
+
+sub mapped_dists_data {
+  my ($self) = @_;
+  return map { $self->store->{$_} } $self->mapped_dists();
 }
 
 
@@ -34,10 +44,20 @@ sub multi_repository_dists {
   return grep { $self->store->{$_}->is_multi_repository } $self->all_mapped_dists;
 }
 
+sub multi_repository_dists_data {
+  my ($self) = @_;
+  return map { $self->store->{$_} } $self->multi_repository_dists;
+}
+
 
 sub dists_in_repository {
   my ( $self, $repository ) = @_;
   return grep { $self->store->{$_}->in_repository($repository) } $self->all_mapped_dists;
+}
+
+sub dists_in_repository_data {
+  my ( $self, $repository ) = @_;
+  return map { $self->store->{$_} } $self->dists_in_repository;
 }
 
 
@@ -75,9 +95,6 @@ sub to_rec {
   }
   return $out;
 }
-
-
-
 
 
 sub from_rec {

@@ -17,6 +17,7 @@ use Sub::Quote qw( quote_sub );
 
 with 'Gentoo::Perl::Distmap::Role::Serialize';
 
+
 has 'category'        => rw, required;
 has 'package'         => rw, required;
 has 'repository'      => rw, required;
