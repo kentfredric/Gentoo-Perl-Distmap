@@ -50,11 +50,12 @@ sub pmver {
 }
 
 eval { $v .= pmver('Carp','any version') };
-eval { $v .= pmver('Dist::Zilla::PluginBundle::Author::KENTNL','v1.4.3') };
+eval { $v .= pmver('Dist::Zilla::PluginBundle::Author::KENTNL','v1.5.0') };
 eval { $v .= pmver('Dist::Zilla::PluginBundle::Author::KENTNL::Lite','v1.3.0') };
 eval { $v .= pmver('File::Find','any version') };
 eval { $v .= pmver('File::Temp','any version') };
 eval { $v .= pmver('FindBin','any version') };
+eval { $v .= pmver('Gentoo::Perl::Distmap::Role::Serialize','any version') };
 eval { $v .= pmver('JSON','any version') };
 eval { $v .= pmver('Module::Build','0.4002') };
 eval { $v .= pmver('Moo','any version') };

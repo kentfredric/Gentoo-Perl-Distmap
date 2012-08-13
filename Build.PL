@@ -23,13 +23,14 @@ my %module_build_args = (
     "Kent Fredric <kentfredric\@gmail.com>"
   ],
   "dist_name" => "Gentoo-Perl-Distmap",
-  "dist_version" => "0.1.2",
+  "dist_version" => "0.1.3",
   "license" => "perl",
   "module_name" => "Gentoo::Perl::Distmap",
   "recommends" => {},
   "recursive_test_files" => 1,
   "requires" => {
     "Carp" => 0,
+    "Gentoo::Perl::Distmap::Role::Serialize" => 0,
     "JSON" => 0,
     "Moo" => 0,
     "MooseX::Has::Sugar" => 0,

@@ -6,7 +6,7 @@ BEGIN {
   $Gentoo::Perl::Distmap::Map::AUTHORITY = 'cpan:KENTNL';
 }
 {
-  $Gentoo::Perl::Distmap::Map::VERSION = '0.1.2';
+  $Gentoo::Perl::Distmap::Map::VERSION = '0.1.3';
 }
 
 # ABSTRACT: A collection of CPAN dists mapped to Gentoo ones.
@@ -14,6 +14,8 @@ BEGIN {
 use Moo;
 use MooseX::Has::Sugar qw( rw );
 use Sub::Quote qw( quote_sub );
+
+with 'Gentoo::Perl::Distmap::Role::Serialize';
 
 has store => rw, default => quote_sub(q{ {} });
 
@@ -75,6 +77,9 @@ sub to_rec {
 }
 
 
+
+
+
 sub from_rec {
   my ( $class, $rec ) = @_;
   if ( ref $rec ne 'HASH' ) {
@@ -106,7 +111,7 @@ Gentoo::Perl::Distmap::Map - A collection of CPAN dists mapped to Gentoo ones.
 
 =head1 VERSION
 
-version 0.1.2
+version 0.1.3
 
 =head1 ATTRIBUTES
 
