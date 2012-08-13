@@ -6,7 +6,7 @@ BEGIN {
   $Gentoo::Perl::Distmap::RecordSet::AUTHORITY = 'cpan:KENTNL';
 }
 {
-  $Gentoo::Perl::Distmap::RecordSet::VERSION = '0.1.2';
+  $Gentoo::Perl::Distmap::RecordSet::VERSION = '0.1.3';
 }
 
 # ABSTRACT: A collection of Record objects representing versions in >1 repos.
@@ -14,6 +14,8 @@ BEGIN {
 use Moo;
 use MooseX::Has::Sugar qw( rw );
 use Sub::Quote qw( quote_sub );
+
+with 'Gentoo::Perl::Distmap::Role::Serialize';
 
 
 has 'records' => rw, default => quote_sub(q{ [] });
@@ -108,6 +110,7 @@ sub from_rec {
   require Gentoo::Perl::Distmap::Record;
   return $class->new( records => [ map { Gentoo::Perl::Distmap::Record->from_rec($_) } @{$rec_clone} ] );
 }
+
 no Moo;
 no MooseX::Has::Sugar;
 
@@ -124,7 +127,7 @@ Gentoo::Perl::Distmap::RecordSet - A collection of Record objects representing v
 
 =head1 VERSION
 
-version 0.1.2
+version 0.1.3
 
 =head1 ATTRIBUTES
 

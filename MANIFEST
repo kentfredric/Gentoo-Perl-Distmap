@@ -12,6 +12,8 @@ lib/Gentoo/Perl/Distmap.pm
 lib/Gentoo/Perl/Distmap/Map.pm
 lib/Gentoo/Perl/Distmap/Record.pm
 lib/Gentoo/Perl/Distmap/RecordSet.pm
+lib/Gentoo/Perl/Distmap/Role/Serialize.pm
+meta/Gentoo-Perl-Distmap.json
 perlcritic.rc
 t/00-compile.t
 t/000-report-versions-tiny.t

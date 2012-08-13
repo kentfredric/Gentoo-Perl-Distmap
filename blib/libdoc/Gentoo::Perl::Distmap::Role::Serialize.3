@@ -132,90 +132,32 @@
 .rm #[ #] #H #V #F C
 .\" ========================================================================
 .\"
-.IX Title "Gentoo::Perl::Distmap::Map 3"
-.TH Gentoo::Perl::Distmap::Map 3 "2012-08-13" "perl v5.16.0" "User Contributed Perl Documentation"
+.IX Title "Gentoo::Perl::Distmap::Role::Serialize 3"
+.TH Gentoo::Perl::Distmap::Role::Serialize 3 "2012-08-13" "perl v5.16.0" "User Contributed Perl Documentation"
 .\" For nroff, turn off justification.  Always turn off hyphenation; it makes
 .\" way too many mistakes in technical documents.
 .if n .ad l
 .nh
 .SH "NAME"
-Gentoo::Perl::Distmap::Map \- A collection of CPAN dists mapped to Gentoo ones.
+Gentoo::Perl::Distmap::Role::Serialize \- Basic utilities for serialising/sorting/indexing Distmap nodes.
 .SH "VERSION"
 .IX Header "VERSION"
 version 0.1.3
-.SH "ATTRIBUTES"
-.IX Header "ATTRIBUTES"
-.SS "store"
-.IX Subsection "store"
-.SH "METHODS"
-.IX Header "METHODS"
-.SS "all_mapped_dists"
-.IX Subsection "all_mapped_dists"
-.Vb 1
-\&        my @names = $instance\->all_mapped_dists();
-.Ve
-.SS "all_mapped_dists_data"
-.IX Subsection "all_mapped_dists_data"
-.Vb 1
-\&  my @data = $instance\->all_mapped_dists_data()
-.Ve
-.SS "mapped_dists"
-.IX Subsection "mapped_dists"
-.Vb 1
-\&        my @names = $instance\->mapped_dists();
-.Ve
-.SS "mapped_dists_data"
-.IX Subsection "mapped_dists_data"
-.Vb 1
-\&  my @data = $instance\->mapped_dists_data()
-.Ve
-.SS "multi_repository_dists"
-.IX Subsection "multi_repository_dists"
-.Vb 1
-\&        my @names = $instance\->multi_repository_dists();
-.Ve
-.SS "multi_repository_dists_data"
-.IX Subsection "multi_repository_dists_data"
-.Vb 1
-\&  my @data = $instance\->multi_repository_dists_data()
-.Ve
-.SS "dists_in_repository"
-.IX Subsection "dists_in_repository"
-.Vb 1
-\&        my @names = $instance\->dists_in_repository(\*(Aqgentoo\*(Aq);
-.Ve
-.SS "dists_in_repository_data"
-.IX Subsection "dists_in_repository_data"
-.Vb 1
-\&  my @data = $instance\->dists_in_repository_data(\*(Aqgentoo\*(Aq);
-.Ve
-.SS "add_version"
-.IX Subsection "add_version"
-.Vb 7
-\&        $instance\->add_version(
-\&                distribution => \*(AqPerl\-Dist\-Name\*(Aq
-\&                category     => \*(Aqgentoo\-category\-name\*(Aq,
-\&                package      => \*(Aqgentoo\-package\-name\*(Aq,
-\&                version      => \*(Aqgentoo\-version\*(Aq,
-\&                repository   => \*(Aqgentoo\-repository\-name\*(Aq,
-\&        );
-.Ve
+.SH "ROLE-REQUIRED METHODS"
+.IX Header "ROLE-REQUIRED METHODS"
 .SS "to_rec"
 .IX Subsection "to_rec"
-.Vb 1
-\&        my $datastructure = $instance\->to_rec
-.Ve
-.SH "CLASS METHODS"
-.IX Header "CLASS METHODS"
 .SS "from_rec"
 .IX Subsection "from_rec"
+.SH "METHODS"
+.IX Header "METHODS"
+.SS "hash"
+.IX Subsection "hash"
+Returns \s-1SHA1\s0 of pp($instance\->to_rec)
+.PP
 .Vb 1
-\&        my $instance = G:P:D:Map\->from_rec( $datastructure );
+\&  $astring = $instance\->hash()
 .Ve
-.SH "ATTRIBUTE METHODS"
-.IX Header "ATTRIBUTE METHODS"
-.SS "store \-> store"
-.IX Subsection "store -> store"
 .SH "AUTHOR"
 .IX Header "AUTHOR"
 Kent Fredric <kentfredric@gmail.com>

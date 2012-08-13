@@ -6,7 +6,7 @@ BEGIN {
   $Gentoo::Perl::Distmap::Map::AUTHORITY = 'cpan:KENTNL';
 }
 {
-  $Gentoo::Perl::Distmap::Map::VERSION = '0.1.2';
+  $Gentoo::Perl::Distmap::Map::VERSION = '0.1.3';
 }
 
 # ABSTRACT: A collection of CPAN dists mapped to Gentoo ones.
@@ -15,15 +15,29 @@ use Moo;
 use MooseX::Has::Sugar qw( rw );
 use Sub::Quote qw( quote_sub );
 
+with 'Gentoo::Perl::Distmap::Role::Serialize';
+
+
 has store => rw, default => quote_sub(q{ {} });
 
 
-sub all_mapped_dists { return keys %{ $_[0]->store } }
+sub all_mapped_dists { return ( my (@items) = sort keys %{ $_[0]->store } ) }
+
+
+sub all_mapped_dists_data {
+  return map { $_[0]->store->{$_} } $_[0]->all_mapped_dists;
+}
 
 
 sub mapped_dists {
   my ($self) = @_;
   return grep { $self->store->{$_}->has_versions } $self->all_mapped_dists;
+}
+
+
+sub mapped_dists_data {
+  my ($self) = @_;
+  return map { $self->store->{$_} } $self->mapped_dists();
 }
 
 
@@ -33,9 +47,21 @@ sub multi_repository_dists {
 }
 
 
+sub multi_repository_dists_data {
+  my ($self) = @_;
+  return map { $self->store->{$_} } $self->multi_repository_dists;
+}
+
+
 sub dists_in_repository {
   my ( $self, $repository ) = @_;
   return grep { $self->store->{$_}->in_repository($repository) } $self->all_mapped_dists;
+}
+
+
+sub dists_in_repository_data {
+  my ( $self, $repository ) = @_;
+  return map { $self->store->{$_} } $self->dists_in_repository($repository);
 }
 
 
@@ -106,7 +132,7 @@ Gentoo::Perl::Distmap::Map - A collection of CPAN dists mapped to Gentoo ones.
 
 =head1 VERSION
 
-version 0.1.2
+version 0.1.3
 
 =head1 ATTRIBUTES
 
@@ -118,17 +144,33 @@ version 0.1.2
 
 	my @names = $instance->all_mapped_dists();
 
+=head2 all_mapped_dists_data
+
+  my @data = $instance->all_mapped_dists_data()
+
 =head2 mapped_dists
 
 	my @names = $instance->mapped_dists();
+
+=head2 mapped_dists_data
+
+  my @data = $instance->mapped_dists_data()
 
 =head2 multi_repository_dists
 
 	my @names = $instance->multi_repository_dists();
 
+=head2 multi_repository_dists_data
+
+  my @data = $instance->multi_repository_dists_data()
+
 =head2 dists_in_repository
 
 	my @names = $instance->dists_in_repository('gentoo');
+
+=head2 dists_in_repository_data
+
+  my @data = $instance->dists_in_repository_data('gentoo');
 
 =head2 add_version
 
