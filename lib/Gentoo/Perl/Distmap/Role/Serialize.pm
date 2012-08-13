@@ -9,7 +9,7 @@ BEGIN {
   $Gentoo::Perl::Distmap::Role::Serialize::VERSION = '0.1.3';
 }
 
-# ABSTRACT:
+# ABSTRACT: Basic utilities for serialising/sorting/indexing Distmap nodes.
 
 use Moo::Role;
 
@@ -39,7 +39,7 @@ __END__
 
 =head1 NAME
 
-Gentoo::Perl::Distmap::Role::Serialize - use Moo::Role;
+Gentoo::Perl::Distmap::Role::Serialize - Basic utilities for serialising/sorting/indexing Distmap nodes.
 
 =head1 VERSION
 
