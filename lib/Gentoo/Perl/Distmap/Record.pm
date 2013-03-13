@@ -34,6 +34,11 @@ has 'package'         => rw, required;
 has 'repository'      => rw, required;
 has 'versions_gentoo' => rw, default => quote_sub(q|[]|);
 
+sub description {
+  my ($self) = @_;
+  return sprintf '%s/%s::%s', $self->category, $self->package, $self->repository;
+}
+
 =method add_version
 
 	$instance->add_version('1.1');
@@ -69,10 +74,7 @@ sub enumerate_packages {
   my @out;
   my $prefix = sprintf '=%s/%s-', $self->category, $self->package;
   my $suffix = sprintf '::%s', $self->repository;
-  for my $version ( @{ $self->versions_gentoo } ) {
-    push @out, $prefix . $version . $suffix;
-  }
-  return @out;
+  return map { $prefix . $_ . $suffix } $self->versions_gentoo;
 }
 
 =method to_rec

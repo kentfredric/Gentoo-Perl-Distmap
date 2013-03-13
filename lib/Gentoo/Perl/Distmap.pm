@@ -96,7 +96,7 @@ sub save {
 
 sub _save_string     { return $_[1] }
 sub _save_filehandle { return $_[2]->print( $_[1] ) }
-sub _save_file { require Path::Class::File; return $_[0]->_save_filehandle( $_[1], Path::Class::File->new( $_[2] )->openw() ) }
+sub _save_file       { require Path::Tiny; return $_[0]->_save_filehandle( $_[1], Path::Tiny::path( $_[2] )->openw() ) }
 
 =pc_method _load_file
 
@@ -106,7 +106,7 @@ sub _save_file { require Path::Class::File; return $_[0]->_save_filehandle( $_[1
 
 =cut
 
-sub _load_file { require Path::Class::File; return scalar Path::Class::File->new( $_[2] )->slurp() }
+sub _load_file { require Path::Tiny; return scalar Path::Tiny::path( $_[2] )->slurp() }
 sub _load_filehandle { local $/ = undef; return scalar $_[2]->getline }
 sub _load_string { return $_[2] }
 

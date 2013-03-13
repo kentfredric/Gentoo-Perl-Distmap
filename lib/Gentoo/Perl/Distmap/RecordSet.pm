@@ -61,7 +61,7 @@ sub is_multi_repository {
 sub in_repository {
   my ( $self, $repository ) = @_;
   return grep { $_->repository eq $repository }
-    grep { $_->has_versions } @{ $self->records };
+    grep      { $_->has_versions } @{ $self->records };
 }
 
 =method add_version
