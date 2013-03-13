@@ -24,7 +24,10 @@
  - Path::Tiny
 
  [Dependencies::Removed / runtime requires]
- - Path::Class
+ - Path::Class::File
+
+ [Dependencies::Removed / test requires]
+ - Path::Class::Dir
 
  [Documentation]
  - Copyright year updated
