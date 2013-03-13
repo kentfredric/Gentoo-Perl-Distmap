@@ -1,6 +1,6 @@
 ﻿Release history for Gentoo-Perl-Distmap
 
-0.1.4 2013-03-13T05:57:32Z
+0.1.4 2013-03-13T05:59:43Z
  [!Notable Changes]
  - Move to Path::Tiny
 
@@ -24,7 +24,10 @@
  - Path::Tiny
 
  [Dependencies::Removed / runtime requires]
- - Path::Class
+ - Path::Class::File
+
+ [Dependencies::Removed / test requires]
+ - Path::Class::Dir
 
  [Documentation]
  - Copyright year updated
