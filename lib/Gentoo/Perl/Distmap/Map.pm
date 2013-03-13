@@ -3,7 +3,7 @@ use warnings;
 
 package Gentoo::Perl::Distmap::Map;
 
-# ABSTRACT: A collection of CPAN dists mapped to Gentoo ones.
+# ABSTRACT: A collection of C<CPAN> distributions mapped to C<Gentoo> ones.
 
 use Moo;
 use MooseX::Has::Sugar qw( rw );

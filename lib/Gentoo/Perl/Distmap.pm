@@ -3,7 +3,7 @@ use warnings;
 
 package Gentoo::Perl::Distmap;
 
-# ABSTRACT: A reader/writer for the metadata/perl/distmap.json file.
+# ABSTRACT: A reader/writer for the C<metadata/perl/distmap.json> file.
 
 use 5.010000;
 use Moo;
@@ -29,7 +29,7 @@ use Sub::Quote qw( quote_sub );
 		/* note: dists with empty version sets should be deemed a bug  */
 	}
 
-Interface for creating/augmenting/comparing .json files still to be defined, basic functionality only at this time.
+Interface for creating/augmenting/comparing C<.json> files still to be defined, basic functionality only at this time.
 
 
 =cut

@@ -3,7 +3,7 @@ use warnings;
 
 package Gentoo::Perl::Distmap::Role::Serialize;
 
-# ABSTRACT: Basic utilities for serialising/sorting/indexing Distmap nodes.
+# ABSTRACT: Basic utilities for serialising/sorting/indexing C<Distmap> nodes.
 
 use Moo::Role;
 
@@ -21,7 +21,7 @@ requires from_rec =>;
 
 =method hash
 
-Returns SHA1 of pp($instance->to_rec)
+Returns C<SHA1> of C<<pp($instance->to_rec)>>
 
   $astring = $instance->hash()
 

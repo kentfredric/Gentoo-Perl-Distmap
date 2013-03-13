@@ -3,7 +3,7 @@ use warnings;
 
 package Gentoo::Perl::Distmap::Record;
 
-# ABSTRACT: A Single Distmap Record
+# ABSTRACT: A Single C<Distmap> Record
 
 use Moo;
 use MooseX::Has::Sugar qw( rw required );
@@ -33,6 +33,15 @@ has 'category'        => rw, required;
 has 'package'         => rw, required;
 has 'repository'      => rw, required;
 has 'versions_gentoo' => rw, default => quote_sub(q|[]|);
+
+=method description
+
+A pretty description of this object
+
+    say $object->description
+    # dev-perl/Foo::gentoo
+
+=cut
 
 sub description {
   my ($self) = @_;
@@ -71,7 +80,6 @@ sub has_versions {
 
 sub enumerate_packages {
   my ($self) = @_;
-  my @out;
   my $prefix = sprintf '=%s/%s-', $self->category, $self->package;
   my $suffix = sprintf '::%s', $self->repository;
   return map { $prefix . $_ . $suffix } $self->versions_gentoo;

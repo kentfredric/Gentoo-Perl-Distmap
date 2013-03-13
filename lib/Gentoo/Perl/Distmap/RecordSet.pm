@@ -3,7 +3,7 @@ use warnings;
 
 package Gentoo::Perl::Distmap::RecordSet;
 
-# ABSTRACT: A collection of Record objects representing versions in >1 repos.
+# ABSTRACT: A collection of Record objects representing versions in >1 repositories.
 
 use Moo;
 use MooseX::Has::Sugar qw( rw );

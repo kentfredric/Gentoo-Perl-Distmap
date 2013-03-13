@@ -29,6 +29,8 @@
  [Documentation]
  - Copyright year updated
  - Added README.mkdn
+ - Misc spelling fixes
+ - Slightly improved POD Coverage
 
  [Meta]
  - Bug tracker moved to github
