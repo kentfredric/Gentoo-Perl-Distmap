@@ -4,12 +4,12 @@ use warnings;
 use Test::More;
 use 5.10.0;
 use FindBin;
-use Path::Class::Dir;
-my $corpus = Path::Class::Dir->new($FindBin::Bin)->parent->subdir('corpus');
+use Path::Tiny;
+my $corpus = Path::Tiny::path($FindBin::Bin)->parent->child('corpus');
 
 use Gentoo::Perl::Distmap;
 
-my $dm = Gentoo::Perl::Distmap->load( file => $corpus->file('distmap.json') );
+my $dm = Gentoo::Perl::Distmap->load( file => $corpus->child('distmap.json') );
 pass("loaded without failing");
 
 my $dmx = Gentoo::Perl::Distmap->new();
