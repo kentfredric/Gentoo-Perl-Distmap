@@ -6,7 +6,7 @@ BEGIN {
   $Gentoo::Perl::Distmap::AUTHORITY = 'cpan:KENTNL';
 }
 {
-  $Gentoo::Perl::Distmap::VERSION = '0.1.3';
+  $Gentoo::Perl::Distmap::VERSION = '0.1.4';
 }
 
 # ABSTRACT: A reader/writer for the metadata/perl/distmap.json file.
@@ -43,10 +43,10 @@ sub save {
 
 sub _save_string     { return $_[1] }
 sub _save_filehandle { return $_[2]->print( $_[1] ) }
-sub _save_file { require Path::Class::File; return $_[0]->_save_filehandle( $_[1], Path::Class::File->new( $_[2] )->openw() ) }
+sub _save_file       { require Path::Tiny; return $_[0]->_save_filehandle( $_[1], Path::Tiny::path( $_[2] )->openw() ) }
 
 
-sub _load_file { require Path::Class::File; return scalar Path::Class::File->new( $_[2] )->slurp() }
+sub _load_file { require Path::Tiny; return scalar Path::Tiny::path( $_[2] )->slurp() }
 sub _load_filehandle { local $/ = undef; return scalar $_[2]->getline }
 sub _load_string { return $_[2] }
 
@@ -64,8 +64,8 @@ no MooseX::Has::Sugar;
 
 1;
 
-
 __END__
+
 =pod
 
 =encoding utf-8
@@ -76,7 +76,7 @@ Gentoo::Perl::Distmap - A reader/writer for the metadata/perl/distmap.json file.
 
 =head1 VERSION
 
-version 0.1.3
+version 0.1.4
 
 =head1 SYNOPSIS
 
@@ -163,10 +163,9 @@ Kent Fredric <kentfredric@gmail.com>
 
 =head1 COPYRIGHT AND LICENSE
 
-This software is copyright (c) 2012 by Kent Fredric <kentfredric@gmail.com>.
+This software is copyright (c) 2013 by Kent Fredric <kentfredric@gmail.com>.
 
 This is free software; you can redistribute it and/or modify it under
 the same terms as the Perl 5 programming language system itself.
 
 =cut
-

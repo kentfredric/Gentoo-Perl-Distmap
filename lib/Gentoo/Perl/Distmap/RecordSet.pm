@@ -6,7 +6,7 @@ BEGIN {
   $Gentoo::Perl::Distmap::RecordSet::AUTHORITY = 'cpan:KENTNL';
 }
 {
-  $Gentoo::Perl::Distmap::RecordSet::VERSION = '0.1.3';
+  $Gentoo::Perl::Distmap::RecordSet::VERSION = '0.1.4';
 }
 
 # ABSTRACT: A collection of Record objects representing versions in >1 repos.
@@ -41,7 +41,7 @@ sub is_multi_repository {
 sub in_repository {
   my ( $self, $repository ) = @_;
   return grep { $_->repository eq $repository }
-    grep { $_->has_versions } @{ $self->records };
+    grep      { $_->has_versions } @{ $self->records };
 }
 
 
@@ -117,6 +117,7 @@ no MooseX::Has::Sugar;
 1;
 
 __END__
+
 =pod
 
 =encoding utf-8
@@ -127,7 +128,7 @@ Gentoo::Perl::Distmap::RecordSet - A collection of Record objects representing v
 
 =head1 VERSION
 
-version 0.1.3
+version 0.1.4
 
 =head1 ATTRIBUTES
 
@@ -182,10 +183,9 @@ Kent Fredric <kentfredric@gmail.com>
 
 =head1 COPYRIGHT AND LICENSE
 
-This software is copyright (c) 2012 by Kent Fredric <kentfredric@gmail.com>.
+This software is copyright (c) 2013 by Kent Fredric <kentfredric@gmail.com>.
 
 This is free software; you can redistribute it and/or modify it under
 the same terms as the Perl 5 programming language system itself.
 
 =cut
-

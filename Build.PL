@@ -10,20 +10,20 @@ my %module_build_args = (
     "File::Find" => 0,
     "File::Temp" => 0,
     "FindBin" => 0,
-    "Module::Build" => "0.4002",
+    "Module::Build" => "0.4003",
     "Path::Class::Dir" => 0,
     "Test::More" => "0.98",
     "perl" => "v5.10.0"
   },
   "configure_requires" => {
-    "Module::Build" => "0.4002"
+    "Module::Build" => "0.4003"
   },
   "dist_abstract" => "A reader/writer for the metadata/perl/distmap.json file.",
   "dist_author" => [
     "Kent Fredric <kentfredric\@gmail.com>"
   ],
   "dist_name" => "Gentoo-Perl-Distmap",
-  "dist_version" => "0.1.3",
+  "dist_version" => "0.1.4",
   "license" => "perl",
   "module_name" => "Gentoo::Perl::Distmap",
   "recommends" => {},
@@ -36,7 +36,7 @@ my %module_build_args = (
     "Moo" => 0,
     "Moo::Role" => 0,
     "MooseX::Has::Sugar" => 0,
-    "Path::Class::File" => 0,
+    "Path::Tiny" => 0,
     "Sub::Quote" => 0,
     "perl" => "v5.10.0",
     "strict" => 0,

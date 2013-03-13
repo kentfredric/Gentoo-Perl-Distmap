@@ -3,7 +3,7 @@ NAME
     metadata/perl/distmap.json file.
 
 VERSION
-    version 0.1.3
+    version 0.1.4
 
 SYNOPSIS
             my $dm  = Gentoo::Perl::Distmap->load(  file => '../path/to/distmap.json' );
@@ -65,7 +65,7 @@ AUTHOR
     Kent Fredric <kentfredric@gmail.com>
 
 COPYRIGHT AND LICENSE
-    This software is copyright (c) 2012 by Kent Fredric
+    This software is copyright (c) 2013 by Kent Fredric
     <kentfredric@gmail.com>.
 
     This is free software; you can redistribute it and/or modify it under
