@@ -116,7 +116,7 @@ version 0.1.4
 
 A pretty description of this object
 
-    say $object->description 
+    say $object->description
     # dev-perl/Foo::gentoo
 
 =head2 add_version
