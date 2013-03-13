@@ -1,28 +1,27 @@
 do{ my $x = {
-       'build_requires' => {
-                             'perl' => 'v5.10.0',
-                             'Test::More' => '0.98',
-                             'FindBin' => 0,
-                             'File::Find' => 0,
-                             'Path::Class::Dir' => 0,
-                             'File::Temp' => 0,
-                             'Module::Build' => '0.4002'
-                           },
-       'conflicts' => {},
+       'recommends' => {},
        'requires' => {
+                       'Moo::Role' => 0,
+                       'Data::Dump' => 0,
+                       'strict' => 0,
+                       'Moo' => 0,
+                       'perl' => 'v5.10.0',
                        'warnings' => 0,
                        'MooseX::Has::Sugar' => 0,
-                       'Moo' => 0,
-                       'Moo::Role' => 0,
-                       'Sub::Quote' => 0,
                        'Carp' => 0,
-                       'strict' => 0,
-                       'perl' => 'v5.10.0',
-                       'Data::Dump' => 0,
+                       'JSON' => 0,
+                       'Sub::Quote' => 0,
                        'Digest::SHA' => 0,
-                       'Path::Class::File' => 0,
-                       'JSON' => 0
+                       'Path::Tiny' => 0
                      },
-       'recommends' => {}
+       'build_requires' => {
+                             'Test::More' => '0.98',
+                             'File::Temp' => 0,
+                             'perl' => 'v5.10.0',
+                             'File::Find' => 0,
+                             'Module::Build' => '0.4003',
+                             'FindBin' => 0
+                           },
+       'conflicts' => {}
      };
 $x; }

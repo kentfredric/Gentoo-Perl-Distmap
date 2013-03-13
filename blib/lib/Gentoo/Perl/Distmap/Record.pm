@@ -6,10 +6,10 @@ BEGIN {
   $Gentoo::Perl::Distmap::Record::AUTHORITY = 'cpan:KENTNL';
 }
 {
-  $Gentoo::Perl::Distmap::Record::VERSION = '0.1.3';
+  $Gentoo::Perl::Distmap::Record::VERSION = '0.1.4';
 }
 
-# ABSTRACT: A Single Distmap Record
+# ABSTRACT: A Single C<Distmap> Record
 
 use Moo;
 use MooseX::Has::Sugar qw( rw required );
@@ -22,6 +22,12 @@ has 'category'        => rw, required;
 has 'package'         => rw, required;
 has 'repository'      => rw, required;
 has 'versions_gentoo' => rw, default => quote_sub(q|[]|);
+
+
+sub description {
+  my ($self) = @_;
+  return sprintf '%s/%s::%s', $self->category, $self->package, $self->repository;
+}
 
 
 sub add_version {
@@ -38,13 +44,9 @@ sub has_versions {
 
 sub enumerate_packages {
   my ($self) = @_;
-  my @out;
   my $prefix = sprintf '=%s/%s-', $self->category, $self->package;
   my $suffix = sprintf '::%s', $self->repository;
-  for my $version ( @{ $self->versions_gentoo } ) {
-    push @out, $prefix . $version . $suffix;
-  }
-  return @out;
+  return map { $prefix . $_ . $suffix } $self->versions_gentoo;
 }
 
 
@@ -85,17 +87,18 @@ no MooseX::Has::Sugar;
 1;
 
 __END__
+
 =pod
 
 =encoding utf-8
 
 =head1 NAME
 
-Gentoo::Perl::Distmap::Record - A Single Distmap Record
+Gentoo::Perl::Distmap::Record - A Single C<Distmap> Record
 
 =head1 VERSION
 
-version 0.1.3
+version 0.1.4
 
 =head1 ATTRIBUTES
 
@@ -108,6 +111,13 @@ version 0.1.3
 =head2 versions_gentoo
 
 =head1 METHODS
+
+=head2 description
+
+A pretty description of this object
+
+    say $object->description
+    # dev-perl/Foo::gentoo
 
 =head2 add_version
 
@@ -149,10 +159,9 @@ Kent Fredric <kentfredric@gmail.com>
 
 =head1 COPYRIGHT AND LICENSE
 
-This software is copyright (c) 2012 by Kent Fredric <kentfredric@gmail.com>.
+This software is copyright (c) 2013 by Kent Fredric <kentfredric@gmail.com>.
 
 This is free software; you can redistribute it and/or modify it under
 the same terms as the Perl 5 programming language system itself.
 
 =cut
-
