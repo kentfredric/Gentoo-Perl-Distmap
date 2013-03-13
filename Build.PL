@@ -38,7 +38,7 @@ my %module_build_args = (
     "MooseX::Has::Sugar" => 0,
     "Path::Tiny" => 0,
     "Sub::Quote" => 0,
-    "perl" => "5.010000",
+    "perl" => "v5.10.0",
     "strict" => 0,
     "warnings" => 0
   },
