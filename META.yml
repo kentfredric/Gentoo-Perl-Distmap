@@ -7,7 +7,6 @@ build_requires:
   File::Temp: 0
   FindBin: 0
   Module::Build: 0.4003
-  Path::Class::Dir: 0
   Test::More: 0.98
   perl: v5.10.0
 configure_requires:
@@ -68,7 +67,6 @@ x_BuiltWith:
     Moo: 1.000008
     Moo::Role: NA(undef)
     MooseX::Has::Sugar: 0.05070421
-    Path::Class::Dir: 0.31
     Path::Tiny: 0.014
     Pod::Coverage::TrustPod: 0.100002
     Sub::Quote: NA(undef)

@@ -61,7 +61,6 @@
             "File::Find" : "0",
             "File::Temp" : "0",
             "FindBin" : "0",
-            "Path::Class::Dir" : "0",
             "Test::More" : "0.98",
             "perl" : "v5.10.0"
          }
@@ -117,7 +116,6 @@
          "Moo" : "1.000008",
          "Moo::Role" : "NA(undef)",
          "MooseX::Has::Sugar" : "0.05070421",
-         "Path::Class::Dir" : "0.31",
          "Path::Tiny" : "0.014",
          "Pod::Coverage::TrustPod" : "0.100002",
          "Sub::Quote" : "NA(undef)",

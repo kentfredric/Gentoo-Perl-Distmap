@@ -11,7 +11,6 @@ my %module_build_args = (
     "File::Temp" => 0,
     "FindBin" => 0,
     "Module::Build" => "0.4003",
-    "Path::Class::Dir" => 0,
     "Test::More" => "0.98",
     "perl" => "v5.10.0"
   },

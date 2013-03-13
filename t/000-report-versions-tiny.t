@@ -61,7 +61,6 @@ eval { $v .= pmver('Module::Build','0.4003') };
 eval { $v .= pmver('Moo','any version') };
 eval { $v .= pmver('Moo::Role','any version') };
 eval { $v .= pmver('MooseX::Has::Sugar','any version') };
-eval { $v .= pmver('Path::Class::Dir','any version') };
 eval { $v .= pmver('Path::Tiny','any version') };
 eval { $v .= pmver('Pod::Coverage::TrustPod','any version') };
 eval { $v .= pmver('Sub::Quote','any version') };
