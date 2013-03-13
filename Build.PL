@@ -18,7 +18,7 @@ my %module_build_args = (
   "configure_requires" => {
     "Module::Build" => "0.4003"
   },
-  "dist_abstract" => "A reader/writer for the metadata/perl/distmap.json file.",
+  "dist_abstract" => "A reader/writer for the C<metadata/perl/distmap.json> file.",
   "dist_author" => [
     "Kent Fredric <kentfredric\@gmail.com>"
   ],

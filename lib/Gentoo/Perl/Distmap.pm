@@ -9,7 +9,7 @@ BEGIN {
   $Gentoo::Perl::Distmap::VERSION = '0.1.4';
 }
 
-# ABSTRACT: A reader/writer for the metadata/perl/distmap.json file.
+# ABSTRACT: A reader/writer for the C<metadata/perl/distmap.json> file.
 
 use 5.010000;
 use Moo;
@@ -72,7 +72,7 @@ __END__
 
 =head1 NAME
 
-Gentoo::Perl::Distmap - A reader/writer for the metadata/perl/distmap.json file.
+Gentoo::Perl::Distmap - A reader/writer for the C<metadata/perl/distmap.json> file.
 
 =head1 VERSION
 
@@ -97,7 +97,7 @@ version 0.1.4
 		/* note: dists with empty version sets should be deemed a bug  */
 	}
 
-Interface for creating/augmenting/comparing .json files still to be defined, basic functionality only at this time.
+Interface for creating/augmenting/comparing C<.json> files still to be defined, basic functionality only at this time.
 
 =head1 ATTRIBUTES
 

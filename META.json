@@ -1,5 +1,5 @@
 {
-   "abstract" : "A reader/writer for the metadata/perl/distmap.json file.",
+   "abstract" : "A reader/writer for the C<metadata/perl/distmap.json> file.",
    "author" : [
       "Kent Fredric <kentfredric@gmail.com>"
    ],

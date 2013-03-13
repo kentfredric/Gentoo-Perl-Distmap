@@ -1,6 +1,6 @@
 NAME
     Gentoo::Perl::Distmap - A reader/writer for the
-    metadata/perl/distmap.json file.
+    "metadata/perl/distmap.json" file.
 
 VERSION
     version 0.1.4
@@ -23,7 +23,7 @@ SYNOPSIS
                     /* note: dists with empty version sets should be deemed a bug  */
             }
 
-    Interface for creating/augmenting/comparing .json files still to be
+    Interface for creating/augmenting/comparing ".json" files still to be
     defined, basic functionality only at this time.
 
 ATTRIBUTES
