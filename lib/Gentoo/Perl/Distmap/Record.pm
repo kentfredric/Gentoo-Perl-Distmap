@@ -23,6 +23,7 @@ has 'package'         => rw, required;
 has 'repository'      => rw, required;
 has 'versions_gentoo' => rw, default => quote_sub(q|[]|);
 
+
 sub description {
   my ($self) = @_;
   return sprintf '%s/%s::%s', $self->category, $self->package, $self->repository;
@@ -110,6 +111,13 @@ version 0.1.4
 =head2 versions_gentoo
 
 =head1 METHODS
+
+=head2 description
+
+A pretty description of this object
+
+    say $object->description 
+    # dev-perl/Foo::gentoo
 
 =head2 add_version
 
