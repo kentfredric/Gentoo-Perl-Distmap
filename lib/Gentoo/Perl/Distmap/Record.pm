@@ -9,7 +9,7 @@ BEGIN {
   $Gentoo::Perl::Distmap::Record::VERSION = '0.1.4';
 }
 
-# ABSTRACT: A Single Distmap Record
+# ABSTRACT: A Single C<Distmap> Record
 
 use Moo;
 use MooseX::Has::Sugar qw( rw required );
@@ -43,7 +43,6 @@ sub has_versions {
 
 sub enumerate_packages {
   my ($self) = @_;
-  my @out;
   my $prefix = sprintf '=%s/%s-', $self->category, $self->package;
   my $suffix = sprintf '::%s', $self->repository;
   return map { $prefix . $_ . $suffix } $self->versions_gentoo;
@@ -94,7 +93,7 @@ __END__
 
 =head1 NAME
 
-Gentoo::Perl::Distmap::Record - A Single Distmap Record
+Gentoo::Perl::Distmap::Record - A Single C<Distmap> Record
 
 =head1 VERSION
 

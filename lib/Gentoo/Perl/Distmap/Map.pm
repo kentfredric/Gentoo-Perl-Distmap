@@ -9,7 +9,7 @@ BEGIN {
   $Gentoo::Perl::Distmap::Map::VERSION = '0.1.4';
 }
 
-# ABSTRACT: A collection of CPAN dists mapped to Gentoo ones.
+# ABSTRACT: A collection of C<CPAN> distributions mapped to C<Gentoo> ones.
 
 use Moo;
 use MooseX::Has::Sugar qw( rw );
@@ -129,7 +129,7 @@ __END__
 
 =head1 NAME
 
-Gentoo::Perl::Distmap::Map - A collection of CPAN dists mapped to Gentoo ones.
+Gentoo::Perl::Distmap::Map - A collection of C<CPAN> distributions mapped to C<Gentoo> ones.
 
 =head1 VERSION
 

@@ -9,7 +9,7 @@ BEGIN {
   $Gentoo::Perl::Distmap::RecordSet::VERSION = '0.1.4';
 }
 
-# ABSTRACT: A collection of Record objects representing versions in >1 repos.
+# ABSTRACT: A collection of Record objects representing versions in >1 repositories.
 
 use Moo;
 use MooseX::Has::Sugar qw( rw );
@@ -124,7 +124,7 @@ __END__
 
 =head1 NAME
 
-Gentoo::Perl::Distmap::RecordSet - A collection of Record objects representing versions in >1 repos.
+Gentoo::Perl::Distmap::RecordSet - A collection of Record objects representing versions in >1 repositories.
 
 =head1 VERSION
 
