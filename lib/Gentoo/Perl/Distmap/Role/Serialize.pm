@@ -9,7 +9,7 @@ BEGIN {
   $Gentoo::Perl::Distmap::Role::Serialize::VERSION = '0.1.4';
 }
 
-# ABSTRACT: Basic utilities for serialising/sorting/indexing Distmap nodes.
+# ABSTRACT: Basic utilities for serialising/sorting/indexing C<Distmap> nodes.
 
 use Moo::Role;
 
@@ -40,7 +40,7 @@ __END__
 
 =head1 NAME
 
-Gentoo::Perl::Distmap::Role::Serialize - Basic utilities for serialising/sorting/indexing Distmap nodes.
+Gentoo::Perl::Distmap::Role::Serialize - Basic utilities for serialising/sorting/indexing C<Distmap> nodes.
 
 =head1 VERSION
 
@@ -56,7 +56,7 @@ version 0.1.4
 
 =head2 hash
 
-Returns SHA1 of pp($instance->to_rec)
+Returns C<SHA1> of C<<pp($instance->to_rec)>>
 
   $astring = $instance->hash()
 
