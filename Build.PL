@@ -30,7 +30,7 @@ my %module_build_args = (
     "Moose" => 0,
     "Moose::Role" => 0,
     "Path::Tiny" => 0,
-    "perl" => "5.010000",
+    "perl" => "v5.10.0",
     "strict" => 0,
     "warnings" => 0
   },
