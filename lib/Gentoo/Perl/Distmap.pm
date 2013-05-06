@@ -6,7 +6,7 @@ BEGIN {
   $Gentoo::Perl::Distmap::AUTHORITY = 'cpan:KENTNL';
 }
 {
-  $Gentoo::Perl::Distmap::VERSION = '0.1.5';
+  $Gentoo::Perl::Distmap::VERSION = '0.2.0';
 }
 
 # ABSTRACT: A reader/writer for the C<metadata/perl/distmap.json> file.
@@ -78,7 +78,7 @@ Gentoo::Perl::Distmap - A reader/writer for the C<metadata/perl/distmap.json> fi
 
 =head1 VERSION
 
-version 0.1.5
+version 0.2.0
 
 =head1 SYNOPSIS
 
