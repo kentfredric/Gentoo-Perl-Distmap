@@ -5,9 +5,7 @@ package Gentoo::Perl::Distmap::RecordSet;
 
 # ABSTRACT: A collection of Record objects representing versions in >1 repositories.
 
-use Moo;
-use MooseX::Has::Sugar qw( rw );
-use Sub::Quote qw( quote_sub );
+use Moose;
 
 with 'Gentoo::Perl::Distmap::Role::Serialize';
 
@@ -15,9 +13,31 @@ with 'Gentoo::Perl::Distmap::Role::Serialize';
 
 =attr_method records -> records
 
+=attr_method all_records -> records.elements
+
+=attr_method grep_reords -> records.grep
+
 =cut
 
-has 'records' => rw, default => quote_sub(q{ [] });
+has 'records' => (
+  isa     => ArrayRef =>,
+  is      => ro       =>,
+  lazy    => 1,
+  traits  => ['Array'],
+  default => sub      { [] },
+  handles => {
+    all_records  => 'elements',
+    grep_records => 'grep',
+  },
+);
+
+=method records_with_versions
+
+=cut
+
+sub records_with_versions {
+  return $_[0]->grep_records( sub { $_->has_versions } );
+}
 
 =method has_versions
 
@@ -29,7 +49,7 @@ has 'records' => rw, default => quote_sub(q{ [] });
 
 sub has_versions {
   my $self = shift;
-  return scalar grep { $_->has_versions } @{ $self->records };
+  return scalar $self->records_with_versions;
 }
 
 =method is_multi_repository
@@ -43,7 +63,7 @@ sub has_versions {
 sub is_multi_repository {
   my $self = shift;
   my %seen;
-  for my $record ( grep { $_->has_versions } @{ $self->records } ) {
+  for my $record ( $self->records_with_versions ) {
     $seen{ $record->repository }++;
   }
   return 1 if scalar keys %seen > 1;
@@ -60,16 +80,66 @@ sub is_multi_repository {
 
 sub in_repository {
   my ( $self, $repository ) = @_;
-  return grep { $_->repository eq $repository }
-    grep      { $_->has_versions } @{ $self->records };
+  return grep { $_->repository eq $repository } $self->records_with_versions;
+}
+
+=method find_or_create_record
+
+    my $record = $recordset->find_or_create_record(
+        category   => foo  =>,
+        package    => bar  =>,
+        repository => quux =>,
+    );
+
+=cut
+
+sub find_or_create_record {
+  my ( $self, %config ) = @_;
+  my %cloned;
+  for my $need (qw( category package repository )) {
+    if ( exists $config{$need} ) {
+      $cloned{$need} = delete $config{$need};
+      next;
+    }
+    require Carp;
+    Carp::confess("Need parameter $need in config");
+  }
+  if ( keys %config ) {
+    require Carp;
+    Carp::confess( 'Surplus keys in config: ' . join q[,], keys %config );
+  }
+  my (@found) = $self->grep_records(
+    sub {
+      return unless $_->category eq $cloned{category};
+      return unless $_->package eq $cloned{package};
+      return unless $_->repository eq $cloned{repository};
+      1;
+    }
+  );
+  return $found[0] if scalar @found == 1;
+  if ( scalar @found > 1 ) {
+    require Carp;
+    Carp::confess( sprintf 'Bug: >1 result for ==category(%s) ==package(%s) ==repository(%s) ',
+      $cloned{category}, $cloned{package}, $cloned{repository} );
+  }
+  require Gentoo::Perl::Distmap::Record;
+  ## no critic( ProhibitAmbiguousNames )
+  my $record = Gentoo::Perl::Distmap::Record->new(
+    category   => $cloned{category},
+    package    => $cloned{package},
+    repository => $cloned{repository},
+  );
+  push @{ $self->records }, $record;
+  return $record;
+
 }
 
 =method add_version
 
 	$instance->add_version(
-		category => 'gentoo-category',
-		package  => 'gentoo-package',
-		version  => 'gentoo-version',
+		category   => 'gentoo-category',
+		package    => 'gentoo-package',
+		version    => 'gentoo-version',
 		repository => 'gentoo-repository',
 	);
 =cut
@@ -90,34 +160,18 @@ sub add_version {
     Carp::confess( 'Surplus keys in config: ' . join q[,], keys %config );
   }
   ## no critic( ProhibitAmbiguousNames )
-  my $record;
-  my (@found) = $self->in_repository( $cloned{repository} );
-  @found =
-    grep { $_->category eq $cloned{category} and $_->package eq $cloned{package} } @found;
-  if ( @found == 1 ) {
-    $record = $found[0];
-  }
-  elsif ( @found > 1 ) {
-    require Carp;
-    Carp::confess( sprintf 'Bug: >1 result for ==category(%s) ==package(%s) ==repository(%s) ',
-      $cloned{category}, $cloned{package}, $cloned{repository} );
-  }
-  else {
-    require Gentoo::Perl::Distmap::Record;
-    $record = Gentoo::Perl::Distmap::Record->new(
-      category   => $cloned{category},
-      package    => $cloned{package},
-      repository => $cloned{repository},
-    );
-    push @{ $self->records }, $record;
-  }
+  my $record = $self->find_or_create_record(
+    category   => $cloned{category},
+    package    => $cloned{package},
+    repository => $cloned{repository},
+  );
   if ( scalar grep { $_ eq $cloned{version} } @{ $record->versions_gentoo } ) {
     require Carp;
     Carp::carp( "Tried to insert version $cloned{version} muliple times for "
         . " package $cloned{package} category $cloned{category} repository $cloned{repository}" );
     return;
   }
-  push @{ $record->versions_gentoo }, $cloned{version};
+  $record->add_version( $cloned{version} );
   return;
 
 }
@@ -150,7 +204,7 @@ sub from_rec {
   return $class->new( records => [ map { Gentoo::Perl::Distmap::Record->from_rec($_) } @{$rec_clone} ] );
 }
 
-no Moo;
-no MooseX::Has::Sugar;
+__PACKAGE__->meta->make_immutable;
+no Moose;
 
 1;

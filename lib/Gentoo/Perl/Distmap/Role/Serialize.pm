@@ -5,7 +5,7 @@ package Gentoo::Perl::Distmap::Role::Serialize;
 
 # ABSTRACT: Basic utilities for serialising/sorting/indexing C<Distmap> nodes.
 
-use Moo::Role;
+use Moose::Role;
 
 =role_requires to_rec
 
@@ -35,6 +35,6 @@ sub hash {
   return Digest::SHA::sha1_base64($rec);
 }
 
-no Moo::Role;
+no Moose::Role;
 
 1;

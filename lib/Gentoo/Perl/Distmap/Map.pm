@@ -5,9 +5,7 @@ package Gentoo::Perl::Distmap::Map;
 
 # ABSTRACT: A collection of C<CPAN> distributions mapped to C<Gentoo> ones.
 
-use Moo;
-use MooseX::Has::Sugar qw( rw );
-use Sub::Quote qw( quote_sub );
+use Moose;
 
 with 'Gentoo::Perl::Distmap::Role::Serialize';
 
@@ -15,9 +13,20 @@ with 'Gentoo::Perl::Distmap::Role::Serialize';
 
 =attr_method store -> store
 
+=attr_method store_keys -> store.keys
+
 =cut
 
-has store => rw, default => quote_sub(q{ {} });
+has store => (
+  isa     => HashRef =>,
+  is      => ro      =>,
+  lazy    => 1,
+  default => sub     { {} },
+  traits  => ['Hash'],
+  handles => {
+    store_keys => 'keys',
+  },
+);
 
 =method all_mapped_dists
 
@@ -25,7 +34,7 @@ has store => rw, default => quote_sub(q{ {} });
 
 =cut
 
-sub all_mapped_dists { return ( my (@items) = sort keys %{ $_[0]->store } ) }
+sub all_mapped_dists { return ( my (@items) = sort $_[0]->store_keys ) }
 
 =method all_mapped_dists_data
 
@@ -175,8 +184,7 @@ sub from_rec {
   }
   return $class->new( store => $in, );
 }
-
-no Moo;
-no MooseX::Has::Sugar;
+__PACKAGE__->meta->make_immutable;
+no Moose;
 
 1;
