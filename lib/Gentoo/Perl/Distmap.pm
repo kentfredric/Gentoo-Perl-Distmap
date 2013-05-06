@@ -6,20 +6,23 @@ BEGIN {
   $Gentoo::Perl::Distmap::AUTHORITY = 'cpan:KENTNL';
 }
 {
-  $Gentoo::Perl::Distmap::VERSION = '0.1.4';
+  $Gentoo::Perl::Distmap::VERSION = '0.2.0';
 }
 
 # ABSTRACT: A reader/writer for the C<metadata/perl/distmap.json> file.
 
 use 5.010000;
-use Moo;
-use MooseX::Has::Sugar qw( rw );
-use Sub::Quote qw( quote_sub );
+use Moose;
 
 
 
-has map => ( rw,
-  default => quote_sub(q| require Gentoo::Perl::Distmap::Map; Gentoo::Perl::Distmap::Map->new() |),
+has map => (
+  isa     => 'Gentoo::Perl::Distmap::Map',
+  is      => ro =>,
+  default => sub {
+    require Gentoo::Perl::Distmap::Map;
+    Gentoo::Perl::Distmap::Map->new();
+  },
   handles => [qw( multi_repository_dists all_mapped_dists mapped_dists dists_in_repository add_version )],
 );
 
@@ -58,9 +61,8 @@ sub decoder {
 sub encoder {
   return state $json = do { require JSON; JSON->new->pretty->utf8->canonical; }
 }
-
-no Moo;
-no MooseX::Has::Sugar;
+__PACKAGE__->meta->make_immutable;
+no Moose;
 
 1;
 
@@ -76,7 +78,7 @@ Gentoo::Perl::Distmap - A reader/writer for the C<metadata/perl/distmap.json> fi
 
 =head1 VERSION
 
-version 0.1.4
+version 0.2.0
 
 =head1 SYNOPSIS
 
