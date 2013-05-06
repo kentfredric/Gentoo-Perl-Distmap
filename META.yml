@@ -21,19 +21,19 @@ name: Gentoo-Perl-Distmap
 provides:
   Gentoo::Perl::Distmap:
     file: lib/Gentoo/Perl/Distmap.pm
-    version: v0.1.5
+    version: v0.2.0
   Gentoo::Perl::Distmap::Map:
     file: lib/Gentoo/Perl/Distmap/Map.pm
-    version: v0.1.5
+    version: v0.2.0
   Gentoo::Perl::Distmap::Record:
     file: lib/Gentoo/Perl/Distmap/Record.pm
-    version: v0.1.5
+    version: v0.2.0
   Gentoo::Perl::Distmap::RecordSet:
     file: lib/Gentoo/Perl/Distmap/RecordSet.pm
-    version: v0.1.5
+    version: v0.2.0
   Gentoo::Perl::Distmap::Role::Serialize:
     file: lib/Gentoo/Perl/Distmap/Role/Serialize.pm
-    version: v0.1.5
+    version: v0.2.0
 requires:
   Carp: 0
   Data::Dump: 0
@@ -51,7 +51,7 @@ resources:
   bugtracker: https://github.com/kentfredric/Gentoo-Perl-Distmap/issues
   homepage: https://github.com/kentfredric/Gentoo-Perl-Distmap
   repository: https://github.com/kentfredric/Gentoo-Perl-Distmap.git
-version: 0.1.5
+version: 0.2.0
 x_BuiltWith:
   modules:
     Carp: 1.28
