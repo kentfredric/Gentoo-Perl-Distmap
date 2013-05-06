@@ -28,7 +28,7 @@ has 'versions_gentoo' => (
   handles => {
     add_version  => 'push',
     has_versions => 'count',
-  }
+  },
 );
 
 
@@ -77,7 +77,7 @@ sub from_rec {
     require Carp;
     Carp::cluck( 'Unknown keys : ' . join q{,}, keys %{$rec_clone} );
   }
-  return $class->new(%$construction);
+  return $class->new(%{$construction});
 }
 
 __PACKAGE__->meta->make_immutable;

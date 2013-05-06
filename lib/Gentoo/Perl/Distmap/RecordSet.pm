@@ -25,7 +25,7 @@ has 'records' => (
   handles => {
     all_records  => 'elements',
     grep_records => 'grep',
-  }
+  },
 );
 
 
@@ -87,6 +87,7 @@ sub find_or_create_record {
       $cloned{category}, $cloned{package}, $cloned{repository} );
   }
   require Gentoo::Perl::Distmap::Record;
+  ## no critic( ProhibitAmbiguousNames )
   my $record = Gentoo::Perl::Distmap::Record->new(
     category   => $cloned{category},
     package    => $cloned{package},

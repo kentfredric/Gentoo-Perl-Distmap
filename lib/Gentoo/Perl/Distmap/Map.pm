@@ -24,7 +24,7 @@ has store => (
   traits  => ['Hash'],
   handles => {
     store_keys => 'keys',
-  }
+  },
 );
 
 
