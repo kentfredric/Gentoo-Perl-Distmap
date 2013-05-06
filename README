@@ -3,7 +3,7 @@ NAME
     "metadata/perl/distmap.json" file.
 
 VERSION
-    version 0.2.0
+    version 0.1.5
 
 SYNOPSIS
             my $dm  = Gentoo::Perl::Distmap->load(  file => '../path/to/distmap.json' );

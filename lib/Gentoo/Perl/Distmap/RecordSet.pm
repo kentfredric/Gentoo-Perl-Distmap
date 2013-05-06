@@ -6,7 +6,7 @@ BEGIN {
   $Gentoo::Perl::Distmap::RecordSet::AUTHORITY = 'cpan:KENTNL';
 }
 {
-  $Gentoo::Perl::Distmap::RecordSet::VERSION = '0.2.0';
+  $Gentoo::Perl::Distmap::RecordSet::VERSION = '0.1.5';
 }
 
 # ABSTRACT: A collection of Record objects representing versions in >1 repositories.
@@ -148,7 +148,8 @@ sub from_rec {
   return $class->new( records => [ map { Gentoo::Perl::Distmap::Record->from_rec($_) } @{$rec_clone} ] );
 }
 
-no Moo;
+__PACKAGE__->meta->make_immutable;
+no Moose;
 
 1;
 
@@ -164,7 +165,7 @@ Gentoo::Perl::Distmap::RecordSet - A collection of Record objects representing v
 
 =head1 VERSION
 
-version 0.2.0
+version 0.1.5
 
 =head1 ATTRIBUTES
 

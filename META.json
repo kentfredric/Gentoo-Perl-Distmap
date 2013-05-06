@@ -47,8 +47,6 @@
             "Data::Dump" : "0",
             "Digest::SHA" : "0",
             "JSON" : "0",
-            "Moo" : "0",
-            "Moo::Role" : "0",
             "Moose" : "0",
             "Moose::Role" : "0",
             "Path::Tiny" : "0",
@@ -70,23 +68,23 @@
    "provides" : {
       "Gentoo::Perl::Distmap" : {
          "file" : "lib/Gentoo/Perl/Distmap.pm",
-         "version" : "v0.2.0"
+         "version" : "v0.1.5"
       },
       "Gentoo::Perl::Distmap::Map" : {
          "file" : "lib/Gentoo/Perl/Distmap/Map.pm",
-         "version" : "v0.2.0"
+         "version" : "v0.1.5"
       },
       "Gentoo::Perl::Distmap::Record" : {
          "file" : "lib/Gentoo/Perl/Distmap/Record.pm",
-         "version" : "v0.2.0"
+         "version" : "v0.1.5"
       },
       "Gentoo::Perl::Distmap::RecordSet" : {
          "file" : "lib/Gentoo/Perl/Distmap/RecordSet.pm",
-         "version" : "v0.2.0"
+         "version" : "v0.1.5"
       },
       "Gentoo::Perl::Distmap::Role::Serialize" : {
          "file" : "lib/Gentoo/Perl/Distmap/Role/Serialize.pm",
-         "version" : "v0.2.0"
+         "version" : "v0.1.5"
       }
    },
    "release_status" : "stable",
@@ -101,7 +99,7 @@
          "web" : "https://github.com/kentfredric/Gentoo-Perl-Distmap"
       }
    },
-   "version" : "0.2.0",
+   "version" : "0.1.5",
    "x_BuiltWith" : {
       "modules" : {
          "Carp" : "1.28",
@@ -114,8 +112,6 @@
          "FindBin" : "1.51",
          "JSON" : "2.57",
          "Module::Build" : "0.4004",
-         "Moo" : "1.001",
-         "Moo::Role" : "NA(undef)",
          "Moose" : "2.0801",
          "Moose::Role" : "2.0801",
          "Path::Tiny" : "0.017",

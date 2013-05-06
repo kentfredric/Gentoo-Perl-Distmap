@@ -6,7 +6,7 @@ BEGIN {
   $Gentoo::Perl::Distmap::Map::AUTHORITY = 'cpan:KENTNL';
 }
 {
-  $Gentoo::Perl::Distmap::Map::VERSION = '0.2.0';
+  $Gentoo::Perl::Distmap::Map::VERSION = '0.1.5';
 }
 
 # ABSTRACT: A collection of C<CPAN> distributions mapped to C<Gentoo> ones.
@@ -139,7 +139,7 @@ Gentoo::Perl::Distmap::Map - A collection of C<CPAN> distributions mapped to C<G
 
 =head1 VERSION
 
-version 0.2.0
+version 0.1.5
 
 =head1 ATTRIBUTES
 

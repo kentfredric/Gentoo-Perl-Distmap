@@ -17,7 +17,7 @@ my %module_build_args = (
     "Kent Fredric <kentfredric\@gmail.com>"
   ],
   "dist_name" => "Gentoo-Perl-Distmap",
-  "dist_version" => "0.2.0",
+  "dist_version" => "0.1.5",
   "license" => "perl",
   "module_name" => "Gentoo::Perl::Distmap",
   "recommends" => {},
@@ -27,8 +27,6 @@ my %module_build_args = (
     "Data::Dump" => 0,
     "Digest::SHA" => 0,
     "JSON" => 0,
-    "Moo" => 0,
-    "Moo::Role" => 0,
     "Moose" => 0,
     "Moose::Role" => 0,
     "Path::Tiny" => 0,

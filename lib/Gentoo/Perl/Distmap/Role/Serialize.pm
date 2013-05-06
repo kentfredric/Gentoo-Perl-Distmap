@@ -6,7 +6,7 @@ BEGIN {
   $Gentoo::Perl::Distmap::Role::Serialize::AUTHORITY = 'cpan:KENTNL';
 }
 {
-  $Gentoo::Perl::Distmap::Role::Serialize::VERSION = '0.2.0';
+  $Gentoo::Perl::Distmap::Role::Serialize::VERSION = '0.1.5';
 }
 
 # ABSTRACT: Basic utilities for serialising/sorting/indexing C<Distmap> nodes.
@@ -28,7 +28,7 @@ sub hash {
   return Digest::SHA::sha1_base64($rec);
 }
 
-no Moo::Role;
+no Moose::Role;
 
 1;
 
@@ -44,7 +44,7 @@ Gentoo::Perl::Distmap::Role::Serialize - Basic utilities for serialising/sorting
 
 =head1 VERSION
 
-version 0.2.0
+version 0.1.5
 
 =head1 ROLE-REQUIRED METHODS
 
