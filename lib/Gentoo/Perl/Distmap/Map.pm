@@ -6,22 +6,29 @@ BEGIN {
   $Gentoo::Perl::Distmap::Map::AUTHORITY = 'cpan:KENTNL';
 }
 {
-  $Gentoo::Perl::Distmap::Map::VERSION = '0.1.4';
+  $Gentoo::Perl::Distmap::Map::VERSION = '0.1.5';
 }
 
 # ABSTRACT: A collection of C<CPAN> distributions mapped to C<Gentoo> ones.
 
-use Moo;
-use MooseX::Has::Sugar qw( rw );
-use Sub::Quote qw( quote_sub );
+use Moose;
 
 with 'Gentoo::Perl::Distmap::Role::Serialize';
 
 
-has store => rw, default => quote_sub(q{ {} });
+has store => (
+  isa     => HashRef =>,
+  is      => ro      =>,
+  lazy    => 1,
+  default => sub     { {} },
+  traits  => ['Hash'],
+  handles => {
+    store_keys => 'keys',
+  }
+);
 
 
-sub all_mapped_dists { return ( my (@items) = sort keys %{ $_[0]->store } ) }
+sub all_mapped_dists { return ( my (@items) = sort $_[0]->store_keys ) }
 
 
 sub all_mapped_dists_data {
@@ -115,9 +122,8 @@ sub from_rec {
   }
   return $class->new( store => $in, );
 }
-
-no Moo;
-no MooseX::Has::Sugar;
+__PACKAGE__->meta->make_immutable;
+no Moose;
 
 1;
 
@@ -133,7 +139,7 @@ Gentoo::Perl::Distmap::Map - A collection of C<CPAN> distributions mapped to C<G
 
 =head1 VERSION
 
-version 0.1.4
+version 0.1.5
 
 =head1 ATTRIBUTES
 
@@ -196,6 +202,8 @@ version 0.1.4
 =head1 ATTRIBUTE METHODS
 
 =head2 store -> store
+
+=head2 store_keys -> store.keys
 
 =head1 AUTHOR
 

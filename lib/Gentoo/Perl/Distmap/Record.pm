@@ -6,22 +6,30 @@ BEGIN {
   $Gentoo::Perl::Distmap::Record::AUTHORITY = 'cpan:KENTNL';
 }
 {
-  $Gentoo::Perl::Distmap::Record::VERSION = '0.1.4';
+  $Gentoo::Perl::Distmap::Record::VERSION = '0.1.5';
 }
 
 # ABSTRACT: A Single C<Distmap> Record
 
-use Moo;
-use MooseX::Has::Sugar qw( rw required );
-use Sub::Quote qw( quote_sub );
+use Moose;
 
 with 'Gentoo::Perl::Distmap::Role::Serialize';
 
 
-has 'category'        => rw, required;
-has 'package'         => rw, required;
-has 'repository'      => rw, required;
-has 'versions_gentoo' => rw, default => quote_sub(q|[]|);
+has 'category'   => ( isa => Str =>, is => ro =>, required => 1 );
+has 'package'    => ( isa => Str =>, is => ro =>, required => 1 );
+has 'repository' => ( isa => Str =>, is => ro =>, required => 1 );
+has 'versions_gentoo' => (
+  isa     => 'ArrayRef[Str]',
+  is      => ro =>,
+  lazy    => 1,
+  default => sub { [] },
+  traits  => ['Array'],
+  handles => {
+    add_version  => 'push',
+    has_versions => 'count',
+  }
+);
 
 
 sub description {
@@ -30,23 +38,15 @@ sub description {
 }
 
 
-sub add_version {
-  my ( $self, @versions ) = @_;
-  push @{ $self->versions_gentoo }, @versions;
-  return $self;
-}
-
-
-sub has_versions {
-  return scalar @{ $_[0]->versions_gentoo };
+sub describe_version {
+  my ( $self, $version ) = @_;
+  return sprintf '=%s/%s-%s::%s', $self->category, $self->package, $version, $self->repository;
 }
 
 
 sub enumerate_packages {
   my ($self) = @_;
-  my $prefix = sprintf '=%s/%s-', $self->category, $self->package;
-  my $suffix = sprintf '::%s', $self->repository;
-  return map { $prefix . $_ . $suffix } $self->versions_gentoo;
+  return map { $self->describe_version($_) } $self->versions_gentoo;
 }
 
 
@@ -67,22 +67,21 @@ sub from_rec {
     require Carp;
     Carp::confess('Can only convert from hash records');
   }
-  my $rec_clone = { %{$rec} };
-  my $instance  = $class->new(
-    category        => delete $rec_clone->{category},
-    package         => delete $rec_clone->{package},
-    repository      => delete $rec_clone->{repository},
-    versions_gentoo => delete $rec_clone->{versions_gentoo},
-  );
+  my $rec_clone    = { %{$rec} };
+  my $construction = {};
+  for my $key (qw( category package repository versions_gentoo )) {
+    next unless exists $rec_clone->{$key};
+    $construction->{$key} = delete $rec_clone->{$key};
+  }
   if ( keys %{$rec_clone} ) {
     require Carp;
     Carp::cluck( 'Unknown keys : ' . join q{,}, keys %{$rec_clone} );
   }
-  return $instance;
+  return $class->new(%$construction);
 }
 
-no Moo;
-no MooseX::Has::Sugar;
+__PACKAGE__->meta->make_immutable;
+no Moose;
 
 1;
 
@@ -98,7 +97,38 @@ Gentoo::Perl::Distmap::Record - A Single C<Distmap> Record
 
 =head1 VERSION
 
-version 0.1.4
+version 0.1.5
+
+=head1 SYNOPSIS
+
+    record: {
+        category:
+        package:
+        repository:
+        versions_gentoo: [
+
+        ]
+    }
+
+    my $record = Gentoo::Perl::Distmap::Record->new(
+        category => 'dev-perl',
+        package  => 'Moo',
+        repository => 'perl-experimental',
+    );
+
+    $record->description # dev-perl/Moo::perl-experimental
+
+    $record->has_versions() # undef
+
+    $record->describe_version( '1.1') #     '=dev-perl/Moo-1.1::perl-experimental'
+
+    $record->add_version('1.1');
+
+    my ( @packages ) = $record->enumerate_packages();
+
+    @packages = (
+        '=dev-perl/Moo-1.1::perl-experimental'
+    )
 
 =head1 ATTRIBUTES
 
@@ -119,19 +149,21 @@ A pretty description of this object
     say $object->description
     # dev-perl/Foo::gentoo
 
-=head2 add_version
+=head2 describe_version
 
-	$instance->add_version('1.1');
+Like L</description> but for a specified version
 
-=head2 has_versions
-
-	if( $instance->has_versions ){
-
-	}
+    say $object->describe_version('1.1');
+    # =dev-perl/Foo-1.1::gentoo
 
 =head2 enumerate_packages
 
+Returns package declarations for all versions
+
 	my @packages = $instance->enumerate_packages();
+
+    # =dev-perl/Foo-1.1::gentoo
+    # =dev-perl/Foo-1.2::gentoo
 
 =head2 to_rec
 
@@ -152,6 +184,16 @@ A pretty description of this object
 =head2 repository -> repository
 
 =head2 versions_gentoo -> versions_gentoo
+
+=head2 add_version -> versions_gentoo.push
+
+	$instance->add_version('1.1');
+
+=head2 has_versions -> versions_gentoo.count
+
+	if( $instance->has_versions ){
+
+	}
 
 =head1 AUTHOR
 
